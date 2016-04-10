@@ -1,5 +1,6 @@
 /QuestRacoon/bin
 /QuestRacoon/obj
-
+/Cyotek.Windows.Forms.ScrollControl/bin
+/Cyotek.Windows.Forms.ScrollControl/obj
 /.vs
 Thumbs.db
