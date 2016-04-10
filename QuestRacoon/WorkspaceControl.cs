@@ -7,68 +7,30 @@ using Cyotek.Windows.Forms;
 
 namespace QuestRacoon
 {
-    /// <summary>
-    ///   Component for displaying images with support for scrolling and zooming.
-    /// </summary>
-    [DefaultProperty("Image")]
     [ToolboxItem(true)]
-    /* [Designer("Cyotek.Windows.Forms.Design.ImageBoxDesigner", Cyotek.Windows.Forms.ImageBox.Design.dll, PublicKeyToken=58daa28b0b2de221")] */
     public class WorkspaceControl : VirtualScrollableControl
     {
         #region Instance Fields
             
-        private bool _autoPan;
-        
+        private bool _autoPan;        
         private bool _invertMouse;
-
-        private bool _isPanning;
-        
+        private bool _isPanning;        
         private Point _startMousePosition;
-
-        private Point _startScrollPosition;
-        
+        private Point _startScrollPosition;        
         private Size _viewSize;
         
         #endregion
 
         #region Public Constructors
 
-        /// <summary>
-        ///   Initializes a new instance of the <see cref="WorkspaceControl" /> class.
-        /// </summary>
+   
         public WorkspaceControl()
         {
             this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
             this.SetStyle(ControlStyles.StandardDoubleClick, false);
-
-            //this.BeginUpdate();
+            
             this.WheelScrollsControl = false;
-            //this.AllowZoom = true;
-            //this.LimitSelectionToImage = true;
-            //this.DropShadowSize = 3;
-            //this.ImageBorderStyle = ImageBoxBorderStyle.None;
-            //this.BackColor = Color.White;
-            //this.AutoSize = false;
-            //this.AutoScroll = true;
-            //this.GridScale = ImageBoxGridScale.Small;
-            //this.GridDisplayMode = ImageBoxGridDisplayMode.Client;
-            //this.GridColor = Color.Gainsboro;
-            //this.GridColorAlternate = Color.White;
-            //this.GridCellSize = 8;
             this.AutoPan = true;
-            //this.InterpolationMode = InterpolationMode.NearestNeighbor;
-            //this.AutoCenter = true;
-            //this.SelectionColor = SystemColors.Highlight;
-            //this.ActualSize();
-            //this.ShortcutsEnabled = true;
-            //this.ZoomLevels = ZoomLevelCollection.Default;
-            //this.ImageBorderColor = SystemColors.ControlDark;
-            //this.PixelGridColor = Color.DimGray;
-            //this.PixelGridThreshold = 5;
-            //this.TextAlign = ContentAlignment.MiddleCenter;
-            //this.TextBackColor = Color.Transparent;
-            //this.TextDisplayMode = ImageBoxGridDisplayMode.Client;
-            //this.EndUpdate();
         }
 
         #endregion
@@ -191,9 +153,9 @@ namespace QuestRacoon
         protected override void OnControlAdded(ControlEventArgs e)
         {
             base.OnControlAdded(e);
-            var block = ((Block)e.Control);
-            if (block != null)
+            if (e.Control is Block)
             {
+                var block = e.Control as Block;
                 block.MoveEnd += Control_MoveEnd;
                 this.AdjustVirtualSize();
             }

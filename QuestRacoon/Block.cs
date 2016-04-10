@@ -20,11 +20,7 @@ namespace QuestRacoon
 
         public Block(WorkspaceControl workspace, Point location) : this()
         {
-            //Width = 200;
-            //Height = 200;
             Location = location;
-            //BackColor = Color.Wheat;
-            //this.bord
             workspace.Controls.Add(this);
         }
 

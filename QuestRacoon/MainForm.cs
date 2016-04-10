@@ -17,9 +17,18 @@ namespace QuestRacoon
             InitializeComponent();
         }
 
+        private Block _block;
+
         private void newBlockToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Block block = new Block(workspace, _clickPos);
+            if (_block != null)
+            {
+                var arrow = new Arrow();
+                workspace.Controls.Add(arrow);
+                arrow.DrawArrow(_block, block);
+            }
+            _block = block;
         }
 
         Point _clickPos;
@@ -55,5 +64,19 @@ namespace QuestRacoon
             }
         }
 
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            //var arrow = new Arrow();
+            //workspace.Controls.Add(arrow);
+            //arrow.DrawArrow(new Point(200, 200), new Point(400, 400));
+
+            Vector2 forward = new Vector2(1f, 0f);
+            Vector2 left = forward.Rotate(-90f);
+
+            Vector2 v = new Vector2(1f, 1f);
+            var len = v.Length;
+            v.Norm = 1f;
+            var len2 = v.Length;
+        }
     }
 }
