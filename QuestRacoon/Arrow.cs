@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuestRacoon
@@ -23,9 +19,9 @@ namespace QuestRacoon
         public Arrow()
         {
             BackColor = Color.Black;
-            ArrowWidth = 10;
-            EndWidth = 20;
-            EndLength = 24;
+            ArrowWidth = 3;
+            EndWidth = 8;
+            EndLength = 14;
         }
 
         public Arrow(WorkspaceControl workspace, Block start, Block end) : this()
@@ -34,20 +30,42 @@ namespace QuestRacoon
             DrawArrow(start, end);
         }
 
+        private void OnBlockMove(object sender, EventArgs e)
+        {
+            DrawArrow(StartBlock, EndBlock);
+        }
+
         public void DrawArrow(Block start, Block end)
         {
-            StartBlock = start;
-            EndBlock = end;
+            if (StartBlock != null && StartBlock != start)
+            {
+                StartBlock.LocationChanged -= OnBlockMove;
+                StartBlock.MoveEnd -= OnBlockMove;
+            }
+            if (StartBlock != start)
+            {
+                StartBlock = start;
+                StartBlock.LocationChanged += OnBlockMove;
+                StartBlock.MoveEnd += OnBlockMove;
+            }
+            if (EndBlock != null && EndBlock != end)
+            {
+                EndBlock.LocationChanged -= OnBlockMove;
+                EndBlock.MoveEnd -= OnBlockMove;
+            }
+            if (EndBlock != end)
+            {
+                EndBlock = end;
+                EndBlock.LocationChanged += OnBlockMove;
+                EndBlock.MoveEnd += OnBlockMove;
+            }
             DrawArrow(
-                start.Bounds.IntersectsFromCenter(end.Bounds.GetCenter()),
-                end.Bounds.IntersectsFromCenter(start.Bounds.GetCenter()));
+            start.Bounds.IntersectsFromCenter(end.Bounds.GetCenter()),
+            end.Bounds.IntersectsFromCenter(start.Bounds.GetCenter()));
         }
 
         public void DrawArrow(Point start, Point end)
         {
-            Location = new Point(Math.Min(start.X, end.X) - EndWidth / 2, Math.Min(start.Y, end.Y) - EndWidth / 2);
-            Size = new Size(Math.Max(start.X, end.X) + EndWidth / 2 - Location.X, Math.Max(start.Y, end.Y) + EndWidth / 2 - Location.Y);
-
             Vector2 guide = new Vector2(start, end);
             Vector2 forward = guide.Normalized();
             Vector2 back = forward.Rotate(180f);
@@ -56,24 +74,39 @@ namespace QuestRacoon
 
             Vector2[] vectorPath = new Vector2[7];
 
-            vectorPath[0] = left * (ArrowWidth / 2);
+            vectorPath[0] = left * (ArrowWidth / 2f);
             vectorPath[1] = vectorPath[0] + forward * (guide.Length - EndLength);
-            vectorPath[2] = vectorPath[1] + left * ((EndWidth - ArrowWidth) / 2);
+            vectorPath[2] = vectorPath[1] + left * ((EndWidth - ArrowWidth) / 2f);
             vectorPath[3] = guide;
-            vectorPath[6] = right * (ArrowWidth / 2);
+            vectorPath[6] = right * (ArrowWidth / 2f);
             vectorPath[5] = vectorPath[6] + forward * (guide.Length - EndLength);
-            vectorPath[4] = vectorPath[5] + right * ((EndWidth - ArrowWidth) / 2);
+            vectorPath[4] = vectorPath[5] + right * ((EndWidth - ArrowWidth) / 2f);
 
-            Vector2 offset = new Vector2(guide.X < 0f ? -guide.X : 0f, guide.Y < 0f ? -guide.Y : 0f);
+            Vector2 min = new Vector2(vectorPath.Min(v => v.X), vectorPath.Min(v => v.Y));
+            Vector2 max = new Vector2(vectorPath.Max(v => v.X), vectorPath.Max(v => v.Y));
+            Point topLeft = start + min;
+            Point width = max - min;
 
-            Point[] points = (from v in vectorPath select (Point)(v + offset)).ToArray<Point>();
-
-            GraphicsPath path = new GraphicsPath();
+            Location = topLeft;
+            Size = new Size(width);
             
-            path.AddLines(points);
-            
+            GraphicsPath path = new GraphicsPath();            
+            path.AddLines((from v in vectorPath select (Point)(v - min)).ToArray<Point>());            
             Region = new Region(path);
+
             Invalidate();
+        }
+        
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                StartBlock.LocationChanged -= OnBlockMove;
+                StartBlock.MoveEnd -= OnBlockMove;
+                EndBlock.LocationChanged -= OnBlockMove;
+                EndBlock.MoveEnd -= OnBlockMove;
+            }
+            base.Dispose(disposing);
         }
     }
 }

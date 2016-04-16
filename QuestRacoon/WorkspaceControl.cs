@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 
@@ -544,7 +543,9 @@ namespace QuestRacoon
             height -= AutoScrollPosition.Y - 10;
             var oldAutoScroll = AutoScrollPosition;
             ViewSize = new Size(width, height);
-            ScrollTo(-oldAutoScroll.X, -oldAutoScroll.Y);
+            int scrollToX = width > Size.Width ? -oldAutoScroll.X : 0;
+            int scrollToY = height > Size.Height ? -oldAutoScroll.Y : 0;
+            ScrollTo(scrollToX, scrollToY);
         }
         
         /// <summary>

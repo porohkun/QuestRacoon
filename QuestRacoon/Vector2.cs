@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Drawing;
 
 namespace QuestRacoon
@@ -46,6 +45,11 @@ namespace QuestRacoon
         public static Vector2 operator +(Vector2 v1,Vector2 v2)
         {
             return new Vector2(v1.X + v2.X, v1.Y + v2.Y);
+        }
+
+        public static Vector2 operator -(Vector2 v1, Vector2 v2)
+        {
+            return new Vector2(v1.X - v2.X, v1.Y - v2.Y);
         }
 
         /// <summary>
@@ -129,7 +133,7 @@ namespace QuestRacoon
 			set
             {
                 float N = Norm;
-                if (N == 0) throw new InvalidOperationException("Cannot set norm for a nul vector !");
+                if (N == 0) { X = 0f;Y = 0f; }//throw new InvalidOperationException("Cannot set norm for a nul vector !");
                 if (N != value)
                 {
                     float Facteur = value / N;

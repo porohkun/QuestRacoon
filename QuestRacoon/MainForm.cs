@@ -15,6 +15,7 @@ namespace QuestRacoon
         public MainForm()
         {
             InitializeComponent();
+            Text = string.Format("{0} v.{1}", Text, Application.ProductVersion);
         }
 
         private Block _block;
@@ -24,9 +25,7 @@ namespace QuestRacoon
             Block block = new Block(workspace, _clickPos);
             if (_block != null)
             {
-                var arrow = new Arrow();
-                workspace.Controls.Add(arrow);
-                arrow.DrawArrow(_block, block);
+                var arrow = new Arrow(workspace, _block, block);
             }
             _block = block;
         }

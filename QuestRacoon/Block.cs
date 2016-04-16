@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuestRacoon
@@ -27,21 +21,15 @@ namespace QuestRacoon
         protected override void OnMouseDown(MouseEventArgs e)
         {
             base.OnMouseDown(e);
-
             if (e.Button == MouseButtons.Left)
-            {
                 _startClickLocation = e.Location;
-            }
         }
-
+        
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-
             if (e.Button == MouseButtons.Left)
-            {
                 Location = Location.Append(new Point(e.X - _startClickLocation.X, e.Y - _startClickLocation.Y));
-            }
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
@@ -50,17 +38,18 @@ namespace QuestRacoon
             if (e.Clicks == 1 && e.Button == MouseButtons.Left)
                 OnMoveEnd(new EventArgs());
         }
-
+        
         protected virtual void OnMoveEnd(EventArgs e)
         {
             EventHandler handler;
-
             handler = this.MoveEnd;
+            handler?.Invoke(this, e);
+        }
 
-            if (handler != null)
-            {
-                handler(this, e);
-            }
+        protected override void OnLocationChanged(EventArgs e)
+        {
+            base.OnLocationChanged(e);
+            headerLabel.Text = string.Format("{0}:{1}", Location.X, Location.Y);
         }
 
         private void label_MouseDown(object sender, MouseEventArgs e)
