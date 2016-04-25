@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -168,11 +170,14 @@ namespace QuestRacoon
         protected override void OnControlRemoved(ControlEventArgs e)
         {
             base.OnControlRemoved(e);
-            var block = ((Block)e.Control);
-            if (block != null)
+            if (e.Control is Block)
             {
-                block.MoveEnd -= Control_MoveEnd;
-                this.AdjustVirtualSize();
+                var block = ((Block)e.Control);
+                if (block != null)
+                {
+                    block.MoveEnd -= Control_MoveEnd;
+                    this.AdjustVirtualSize();
+                }
             }
         }
 
@@ -464,6 +469,18 @@ namespace QuestRacoon
         #endregion
 
         #region Public Members
+
+        public Block GetBlock(string name)
+        {
+            return GetBlocks().FirstOrDefault(b => b.Header == name);
+        }
+
+        public IEnumerable<Block> GetBlocks()
+        {
+            foreach (var c in Controls)
+                if (c is Block)
+                    yield return c as Block;
+        }
 
         #endregion
 

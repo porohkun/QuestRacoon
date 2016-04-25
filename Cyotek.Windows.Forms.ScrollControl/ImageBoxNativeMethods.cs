@@ -18,7 +18,7 @@ namespace Cyotek.Windows.Forms
 
   // ReSharper disable ClassNeverInstantiated.Global
   // ReSharper disable PartialTypeWithSinglePart
-  internal partial class NativeMethods // partial for when linking this file into other assemblies
+  public partial class NativeMethods // partial for when linking this file into other assemblies
     // ReSharper restore PartialTypeWithSinglePart
     // ReSharper restore ClassNeverInstantiated.Global
   {

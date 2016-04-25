@@ -44,6 +44,7 @@
             this.headerLabel.TabIndex = 0;
             this.headerLabel.Text = "header";
             this.headerLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.headerLabel.DoubleClick += new System.EventHandler(this.headerLabel_DoubleClick);
             this.headerLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label_MouseDown);
             this.headerLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label_MouseMove);
             this.headerLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.label_MouseUp);
@@ -59,6 +60,7 @@
             this.bodyLabel.Size = new System.Drawing.Size(142, 113);
             this.bodyLabel.TabIndex = 1;
             this.bodyLabel.Text = "body";
+            this.bodyLabel.DoubleClick += new System.EventHandler(this.headerLabel_DoubleClick);
             this.bodyLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.label_MouseDown);
             this.bodyLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label_MouseMove);
             this.bodyLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.label_MouseUp);

@@ -103,6 +103,11 @@ namespace QuestRacoon
             return new Point((int)v.X, (int)v.Y);
         }
 
+        public static implicit operator PointF(Vector2 v)
+        {
+            return new PointF(v.X, v.Y);
+        }
+
         public static implicit operator Vector2(Point p)
         {
             return new Vector2(p.X, p.Y);

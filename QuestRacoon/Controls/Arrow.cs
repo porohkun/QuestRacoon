@@ -18,8 +18,8 @@ namespace QuestRacoon
 
         public Arrow()
         {
-            BackColor = Color.Black;
-            ArrowWidth = 3;
+            BackColor = Color.Wheat;
+            ArrowWidth = 2;
             EndWidth = 8;
             EndLength = 14;
         }
@@ -91,7 +91,7 @@ namespace QuestRacoon
             Size = new Size(width);
             
             GraphicsPath path = new GraphicsPath();            
-            path.AddLines((from v in vectorPath select (Point)(v - min)).ToArray<Point>());            
+            path.AddLines((from v in vectorPath select (PointF)(v - min)).ToArray<PointF>());            
             Region = new Region(path);
 
             Invalidate();
