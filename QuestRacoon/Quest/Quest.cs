@@ -23,7 +23,7 @@ namespace QuestRacoon.Quest
 
         public Quest()
         {
-            Edited = true;
+            Edited = false;
             _locales.Add("Standart");
             MainLocale = "Standart";
         }

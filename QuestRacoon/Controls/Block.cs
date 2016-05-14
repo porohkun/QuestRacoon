@@ -35,6 +35,8 @@ namespace QuestRacoon
             }
         }
 
+        private WorkspaceControl _workspace;
+
         public Block() : base()
         {
             InitializeComponent();
@@ -48,6 +50,13 @@ namespace QuestRacoon
             _block.TextChanged += blockTextChanged;
             headerLabel.Text = _block.Name;
             SelectedLocale = locale;
+        }
+
+        protected override void OnParentChanged(EventArgs e)
+        {
+            base.OnParentChanged(e);
+            _workspace = Parent as WorkspaceControl;
+            Location = new Point(_block.Location.X - _workspace.HorizontalScroll.Value, _block.Location.Y - _workspace.HorizontalScroll.Value);
         }
 
         private void blockNameChanged()
@@ -131,7 +140,7 @@ namespace QuestRacoon
         
         protected virtual void OnMoveEnd(EventArgs e)
         {
-            _block.SetLocation(Location);
+            _block.SetLocation(new Point(Location.X + _workspace.HorizontalScroll.Value, Location.Y + _workspace.VerticalScroll.Value));
             MoveEnd?.Invoke(this, e);
         }
         
