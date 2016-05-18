@@ -14,9 +14,12 @@ namespace QuestRacoon
         public static string AppRunPath { get { return Application.StartupPath; } }
         public static Settings Set { get; private set; }
         public static UTF8Encoding UTF8WithoutBom { get; private set; }
-        
+
+        public static bool UpdateArrows { get; set; }
+
         static QR()
         {
+            UpdateArrows = true;
             Set = new Settings();
             UTF8WithoutBom = new UTF8Encoding(false);
         }

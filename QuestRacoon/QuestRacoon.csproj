@@ -49,12 +49,14 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Arrow.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ShowControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Forms\BlockEditForm.cs">
@@ -76,6 +78,12 @@
     </Compile>
     <Compile Include="Forms\LocalesForm.Designer.cs">
       <DependentUpon>LocalesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RunForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RunForm.Designer.cs">
+      <DependentUpon>RunForm.cs</DependentUpon>
     </Compile>
     <Compile Include="QR.cs" />
     <Compile Include="Forms\MainForm.cs">
@@ -115,6 +123,9 @@
     <EmbeddedResource Include="Forms\LocalesForm.resx">
       <DependentUpon>LocalesForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RunForm.resx">
+      <DependentUpon>RunForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -150,6 +161,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Play-icon.png" />
+    <None Include="Resources\node-select-all-icon.png" />
     <None Include="Resources\open-document.png" />
     <None Include="Resources\new-document.png" />
     <None Include="Resources\locale.png" />

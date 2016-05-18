@@ -241,5 +241,15 @@ namespace QuestRacoon
             workspace.Controls.Add(block);
         }
 
+        private void updArrowsToolStripButton_Click(object sender, EventArgs e)
+        {
+            QR.UpdateArrows = updArrowsToolStripButton.Checked;
+        }
+
+        private void playToolStripButton_Click(object sender, EventArgs e)
+        {
+            var run = new RunForm(_quest.ToJson());
+            run.Show();
+        }
     }
 }

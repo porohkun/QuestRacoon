@@ -37,26 +37,29 @@
             this.saveQuestAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
-            this.workspaceContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.newBlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openQuestDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveQuestDialog = new System.Windows.Forms.SaveFileDialog();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.cutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.questToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainToolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.workspaceContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.newBlockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openQuestDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveQuestDialog = new System.Windows.Forms.SaveFileDialog();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.newQuestToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.openQuestToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.saveQuestToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.undoToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.redoToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.localesToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.updArrowsToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.playToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.newQuestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openQuestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveQuestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -126,6 +129,61 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.undoToolStripMenuItem,
+            this.redoToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.cutToolStripMenuItem,
+            this.copyToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.deleteToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // cutToolStripMenuItem
+            // 
+            this.cutToolStripMenuItem.Enabled = false;
+            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
+            this.cutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cutToolStripMenuItem.Text = "Cut";
+            // 
+            // copyToolStripMenuItem
+            // 
+            this.copyToolStripMenuItem.Enabled = false;
+            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+            this.copyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.copyToolStripMenuItem.Text = "Copy";
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Enabled = false;
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Enabled = false;
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
+            // questToolStripMenuItem
+            // 
+            this.questToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.localesToolStripMenuItem});
+            this.questToolStripMenuItem.Name = "questToolStripMenuItem";
+            this.questToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.questToolStripMenuItem.Text = "Quest";
+            // 
             // mainToolStrip
             // 
             this.mainToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -136,12 +194,25 @@
             this.undoToolStripButton,
             this.redoToolStripButton,
             this.toolStripSeparator5,
-            this.localesToolStripButton});
+            this.localesToolStripButton,
+            this.updArrowsToolStripButton,
+            this.toolStripSeparator6,
+            this.playToolStripButton});
             this.mainToolStrip.Location = new System.Drawing.Point(0, 24);
             this.mainToolStrip.Name = "mainToolStrip";
             this.mainToolStrip.Size = new System.Drawing.Size(571, 25);
             this.mainToolStrip.TabIndex = 1;
             this.mainToolStrip.Text = "toolStrip1";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // workspaceContextMenu
             // 
@@ -165,70 +236,10 @@
             // 
             this.saveQuestDialog.Filter = "Racoon quest files|*.qrc|All files|*.*";
             // 
-            // editToolStripMenuItem
+            // toolStripSeparator6
             // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.undoToolStripMenuItem,
-            this.redoToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.cutToolStripMenuItem,
-            this.copyToolStripMenuItem,
-            this.pasteToolStripMenuItem,
-            this.deleteToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // questToolStripMenuItem
-            // 
-            this.questToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.localesToolStripMenuItem});
-            this.questToolStripMenuItem.Name = "questToolStripMenuItem";
-            this.questToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.questToolStripMenuItem.Text = "Quest";
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(104, 6);
-            // 
-            // cutToolStripMenuItem
-            // 
-            this.cutToolStripMenuItem.Enabled = false;
-            this.cutToolStripMenuItem.Name = "cutToolStripMenuItem";
-            this.cutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.cutToolStripMenuItem.Text = "Cut";
-            // 
-            // copyToolStripMenuItem
-            // 
-            this.copyToolStripMenuItem.Enabled = false;
-            this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-            this.copyToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.copyToolStripMenuItem.Text = "Copy";
-            // 
-            // pasteToolStripMenuItem
-            // 
-            this.pasteToolStripMenuItem.Enabled = false;
-            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
-            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.pasteToolStripMenuItem.Text = "Paste";
-            // 
-            // deleteToolStripMenuItem
-            // 
-            this.deleteToolStripMenuItem.Enabled = false;
-            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.deleteToolStripMenuItem.Text = "Delete";
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
             // 
             // newQuestToolStripButton
             // 
@@ -237,7 +248,7 @@
             this.newQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newQuestToolStripButton.Name = "newQuestToolStripButton";
             this.newQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newQuestToolStripButton.Text = "toolStripButton1";
+            this.newQuestToolStripButton.Text = "New Quest";
             this.newQuestToolStripButton.Click += new System.EventHandler(this.newQuestToolStripMenuItem_Click);
             // 
             // openQuestToolStripButton
@@ -247,7 +258,7 @@
             this.openQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openQuestToolStripButton.Name = "openQuestToolStripButton";
             this.openQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openQuestToolStripButton.Text = "toolStripButton2";
+            this.openQuestToolStripButton.Text = "Open Quest";
             this.openQuestToolStripButton.Click += new System.EventHandler(this.openQuestToolStripMenuItem_Click);
             // 
             // saveQuestToolStripButton
@@ -257,7 +268,7 @@
             this.saveQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveQuestToolStripButton.Name = "saveQuestToolStripButton";
             this.saveQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.saveQuestToolStripButton.Text = "toolStripButton3";
+            this.saveQuestToolStripButton.Text = "Save Quest";
             this.saveQuestToolStripButton.Click += new System.EventHandler(this.saveQuestToolStripMenuItem_Click);
             // 
             // undoToolStripButton
@@ -268,7 +279,7 @@
             this.undoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoToolStripButton.Name = "undoToolStripButton";
             this.undoToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.undoToolStripButton.Text = "toolStripButton4";
+            this.undoToolStripButton.Text = "Undo";
             // 
             // redoToolStripButton
             // 
@@ -278,7 +289,7 @@
             this.redoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redoToolStripButton.Name = "redoToolStripButton";
             this.redoToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.redoToolStripButton.Text = "toolStripButton5";
+            this.redoToolStripButton.Text = "Redo";
             // 
             // localesToolStripButton
             // 
@@ -287,8 +298,31 @@
             this.localesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.localesToolStripButton.Name = "localesToolStripButton";
             this.localesToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.localesToolStripButton.Text = "toolStripButton6";
+            this.localesToolStripButton.Text = "Locales";
             this.localesToolStripButton.Click += new System.EventHandler(this.localesToolStripMenuItem_Click);
+            // 
+            // updArrowsToolStripButton
+            // 
+            this.updArrowsToolStripButton.Checked = true;
+            this.updArrowsToolStripButton.CheckOnClick = true;
+            this.updArrowsToolStripButton.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.updArrowsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.updArrowsToolStripButton.Image = global::QuestRacoon.Properties.Resources.node_select_all_icon;
+            this.updArrowsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.updArrowsToolStripButton.Name = "updArrowsToolStripButton";
+            this.updArrowsToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.updArrowsToolStripButton.Text = "Update Arrows";
+            this.updArrowsToolStripButton.Click += new System.EventHandler(this.updArrowsToolStripButton_Click);
+            // 
+            // playToolStripButton
+            // 
+            this.playToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.playToolStripButton.Image = global::QuestRacoon.Properties.Resources.Play_icon;
+            this.playToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.playToolStripButton.Name = "playToolStripButton";
+            this.playToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.playToolStripButton.Text = "Test Quest";
+            this.playToolStripButton.Click += new System.EventHandler(this.playToolStripButton_Click);
             // 
             // newQuestToolStripMenuItem
             // 
@@ -319,7 +353,7 @@
             this.undoToolStripMenuItem.Enabled = false;
             this.undoToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.arrow_left;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
-            this.undoToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
             // 
             // redoToolStripMenuItem
@@ -327,7 +361,7 @@
             this.redoToolStripMenuItem.Enabled = false;
             this.redoToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.arrow_right;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
-            this.redoToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             // 
             // localesToolStripMenuItem
@@ -409,6 +443,9 @@
         private System.Windows.Forms.ToolStripButton redoToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton localesToolStripButton;
+        private System.Windows.Forms.ToolStripButton updArrowsToolStripButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton playToolStripButton;
     }
 }
 

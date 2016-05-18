@@ -35,7 +35,7 @@ namespace QuestRacoon
             DrawArrow(StartBlock, EndBlock);
         }
 
-        public void DrawArrow(Block start, Block end)
+        public void DrawArrow(Block start, Block end, bool force = false)
         {
             if (StartBlock != null && StartBlock != start)
             {
@@ -61,11 +61,14 @@ namespace QuestRacoon
             }
             DrawArrow(
             start.Bounds.IntersectsFromCenter(end.Bounds.GetCenter()),
-            end.Bounds.IntersectsFromCenter(start.Bounds.GetCenter()));
+            end.Bounds.IntersectsFromCenter(start.Bounds.GetCenter()),
+            force);
         }
 
-        public void DrawArrow(Point start, Point end)
+        private void DrawArrow(Point start, Point end, bool force)
         {
+            if (!(force || QR.UpdateArrows)) return;
+
             Vector2 guide = new Vector2(start, end);
             Vector2 forward = guide.Normalized();
             Vector2 back = forward.Rotate(180f);

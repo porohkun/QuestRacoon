@@ -84,11 +84,19 @@ namespace QuestRacoon.Quest
 
         public IEnumerable<string> GetLinks(string locale)
         {
+            foreach (Match match in GetRawLinks(locale))
+            {
+                yield return match.Value.Substring(2, match.Value.Length - 4).Split('|')[0];
+            }
+        }
+
+        public IEnumerable<Match> GetRawLinks(string locale)
+        {
             Regex reg = new Regex(@"\[\[[\w ]+\|[\w ]+\]\]");
             var matches = reg.Matches(_rawTexts[locale]);
             foreach (Match match in matches)
             {
-                yield return match.Value.Substring(2, match.Value.Length - 4).Split('|')[0];
+                yield return match;
             }
         }
 

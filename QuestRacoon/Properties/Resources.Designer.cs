@@ -113,9 +113,29 @@ namespace QuestRacoon.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap node_select_all_icon {
+            get {
+                object obj = ResourceManager.GetObject("node-select-all-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap open_document {
             get {
                 object obj = ResourceManager.GetObject("open-document", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Play_icon {
+            get {
+                object obj = ResourceManager.GetObject("Play-icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
