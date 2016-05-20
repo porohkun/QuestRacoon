@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestRacoon", "QuestRacoon\QuestRacoon.csproj", "{F9B97576-8DC6-49EF-9E2B-145A13A4A3E3}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PNetJson", "..\PNetJson\PNetJson\PNetJson.csproj", "{6E6426C6-BA6F-4766-92E4-7E6B594F0392}"
 EndProject
 Project("{840C416C-B8F3-42BC-B0DD-F6BB14C9F8CB}") = "Setup", "Setup\Setup.aiproj", "{D1493C62-C00F-4479-9B92-D8F837BA4348}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestRacoonWpf", "QuestRacoonWpf\QuestRacoonWpf.csproj", "{B42DD243-0372-42D0-8CEE-77941D2BC2D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{D1493C62-C00F-4479-9B92-D8F837BA4348}.Release|Any CPU.Build.0 = All
 		{D1493C62-C00F-4479-9B92-D8F837BA4348}.Release|x86.ActiveCfg = All
 		{D1493C62-C00F-4479-9B92-D8F837BA4348}.Release|x86.Build.0 = All
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Debug|x86.Build.0 = Debug|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Release|x86.ActiveCfg = Release|Any CPU
+		{B42DD243-0372-42D0-8CEE-77941D2BC2D9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

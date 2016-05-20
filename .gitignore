@@ -2,5 +2,8 @@
 /QuestRacoon/obj
 /Cyotek.Windows.Forms.ScrollControl/bin
 /Cyotek.Windows.Forms.ScrollControl/obj
+/packages
+/QuestRacoonWpf/bin
+/QuestRacoonWpf/obj
 /.vs
 Thumbs.db
