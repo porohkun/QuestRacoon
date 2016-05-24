@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using PNetJson;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     public partial class RunForm : Form
     {

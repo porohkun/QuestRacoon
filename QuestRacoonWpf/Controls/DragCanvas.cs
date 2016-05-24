@@ -104,6 +104,39 @@ namespace QuestRacoonWpf
 
         #endregion // Constructor
 
+        #region BL
+
+        public void AddBlock(FlowBlock block)
+        {
+            Children.Add(block);
+            SetTop(block, block.Top);
+            SetLeft(block, block.Left);
+        }
+
+        public FlowBlock GetBlock(string link)
+        {
+            foreach (var child in Children)
+            {
+                var block = child as FlowBlock;
+                if (block != null && block.Header == link)
+                    return block;
+            }
+            return null;
+        }
+
+        public List<FlowBlock> GetBlocks()
+        {
+            var result = new List<FlowBlock>();
+            foreach (var child in Children)
+            {
+                if (child is FlowBlock)
+                    result.Add(child as FlowBlock);
+            }
+            return result;
+        }
+
+        #endregion
+
         #region Interface
 
         #region AllowDragging
@@ -181,28 +214,20 @@ namespace QuestRacoonWpf
         {
             get
             {
-                if (!this.AllowDragging)
-                    return null;
-                else
-                    return this.elementBeingDragged;
+                return this.elementBeingDragged;
             }
             protected set
             {
                 if (this.elementBeingDragged != null)
                     this.elementBeingDragged.ReleaseMouseCapture();
 
-                if (!this.AllowDragging)
-                    this.elementBeingDragged = null;
-                else
+                if (DragCanvas.GetCanBeDragged(value))
                 {
-                    if (DragCanvas.GetCanBeDragged(value))
-                    {
-                        this.elementBeingDragged = value;
-                        this.elementBeingDragged.CaptureMouse();
-                    }
-                    else
-                        this.elementBeingDragged = null;
+                    this.elementBeingDragged = value;
+                    this.elementBeingDragged.CaptureMouse();
                 }
+                else
+                    this.elementBeingDragged = null;
             }
         }
 
@@ -252,33 +277,37 @@ namespace QuestRacoonWpf
         {
             base.OnPreviewMouseLeftButtonDown(e);
 
-            this.isDragInProgress = false;
+            if (e.ClickCount != 2)
+            {
+                this.isDragInProgress = false;
 
-            // Cache the mouse cursor location.
-            this.origCursorLocation = e.GetPosition(this);
+                // Cache the mouse cursor location.
+                this.origCursorLocation = e.GetPosition(this);
 
-            // Walk up the visual tree from the element that was clicked, 
-            // looking for an element that is a direct child of the Canvas.
-            this.ElementBeingDragged = this.FindCanvasChild(e.Source as DependencyObject);
-            if (this.ElementBeingDragged == null)
-                return;
+                // Walk up the visual tree from the element that was clicked, 
+                // looking for an element that is a direct child of the Canvas.
+                this.ElementBeingDragged = this.FindCanvasChild(e.Source as DependencyObject);
+                if (this.ElementBeingDragged == null)
+                    return;
 
-            // Get the element's offsets from the four sides of the Canvas.
-            double left = Canvas.GetLeft(this.ElementBeingDragged);
-            double right = Canvas.GetRight(this.ElementBeingDragged);
-            double top = Canvas.GetTop(this.ElementBeingDragged);
-            double bottom = Canvas.GetBottom(this.ElementBeingDragged);
+                // Get the element's offsets from the four sides of the Canvas.
+                double left = Canvas.GetLeft(this.ElementBeingDragged);
+                double right = Canvas.GetRight(this.ElementBeingDragged);
+                double top = Canvas.GetTop(this.ElementBeingDragged);
+                double bottom = Canvas.GetBottom(this.ElementBeingDragged);
 
-            // Calculate the offset deltas and determine for which sides
-            // of the Canvas to adjust the offsets.
-            this.origHorizOffset = ResolveOffset(left, right, out this.modifyLeftOffset);
-            this.origVertOffset = ResolveOffset(top, bottom, out this.modifyTopOffset);
+                // Calculate the offset deltas and determine for which sides
+                // of the Canvas to adjust the offsets.
+                this.origHorizOffset = ResolveOffset(left, right, out this.modifyLeftOffset);
+                this.origVertOffset = ResolveOffset(top, bottom, out this.modifyTopOffset);
 
-            // Set the Handled flag so that a control being dragged 
-            // does not react to the mouse input.
-            e.Handled = true;
+                // Set the Handled flag so that a control being dragged 
+                // does not react to the mouse input.
+                e.Handled = true;
 
-            this.isDragInProgress = true;
+                this.isDragInProgress = true;
+            }
+            Console.WriteLine(e.ClickCount);
         }
 
         #endregion // OnPreviewMouseLeftButtonDown
@@ -315,37 +344,6 @@ namespace QuestRacoonWpf
 
             #endregion // Calculate Offsets
 
-            if (!this.AllowDragOutOfView)
-            {
-                #region Verify Drag Element Location
-
-                // Get the bounding rect of the drag element.
-                Rect elemRect = this.CalculateDragElementRect(newHorizontalOffset, newVerticalOffset);
-
-                //
-                // If the element is being dragged out of the viewable area, 
-                // determine the ideal rect location, so that the element is 
-                // within the edge(s) of the canvas.
-                //
-                bool leftAlign = elemRect.Left < 0;
-                bool rightAlign = elemRect.Right > this.ActualWidth;
-
-                if (leftAlign)
-                    newHorizontalOffset = modifyLeftOffset ? 0 : this.ActualWidth - elemRect.Width;
-                else if (rightAlign)
-                    newHorizontalOffset = modifyLeftOffset ? this.ActualWidth - elemRect.Width : 0;
-
-                bool topAlign = elemRect.Top < 0;
-                bool bottomAlign = elemRect.Bottom > this.ActualHeight;
-
-                if (topAlign)
-                    newVerticalOffset = modifyTopOffset ? 0 : this.ActualHeight - elemRect.Height;
-                else if (bottomAlign)
-                    newVerticalOffset = modifyTopOffset ? this.ActualHeight - elemRect.Height : 0;
-
-                #endregion // Verify Drag Element Location
-            }
-
             #region Move Drag Element
 
             if (this.modifyLeftOffset)
@@ -360,6 +358,9 @@ namespace QuestRacoonWpf
 
             #endregion // Move Drag Element
 
+            var block = ElementBeingDragged as FlowBlock;
+            if (block != null)
+                block.Move();
         }
 
         #endregion // OnPreviewMouseMove
@@ -380,13 +381,13 @@ namespace QuestRacoonWpf
         #endregion // OnHostPreviewMouseUp
         
         #region MeasureOverride
-
         
-
         protected override Size MeasureOverride(Size constraint)
         {
             double bottomMost = 0d;
             double rightMost = 0d;
+            double minTop = 0d;
+            double minLeft = 0d;
 
             foreach (object obj in Children)
             {
@@ -396,13 +397,31 @@ namespace QuestRacoonWpf
                 {
                     child.Measure(constraint);
 
-                    bottomMost = Math.Max(bottomMost, GetTop(child) + child.DesiredSize.Height);
-                    rightMost = Math.Max(rightMost, GetLeft(child) + child.DesiredSize.Width);
+                    var childTop = GetTop(child); childTop = double.IsNaN(childTop) ? 0 : childTop;
+                    var childLeft = GetLeft(child); childLeft = double.IsNaN(childLeft) ? 0 : childLeft;
+
+                    bottomMost = Math.Max(bottomMost, childTop + child.DesiredSize.Height);
+                    rightMost = Math.Max(rightMost, childLeft + child.DesiredSize.Width);
+                    minTop = Math.Min(minTop, childTop);
+                    minLeft = Math.Min(minLeft, childLeft);
                 }
             }
-            return new Size(rightMost, bottomMost);
-        }
 
+            if (minTop < 0 || minLeft < 0)
+                foreach (object obj in Children)
+                {
+                    FrameworkElement child = obj as FrameworkElement;
+                    var childTop = GetTop(child) - minTop;
+                    var childLeft = GetLeft(child) - minLeft;
+                    SetTop(child, childTop);
+                    SetLeft(child, childLeft);
+                    if (child is FlowBlock)
+                        (child as FlowBlock).SetPosition(childLeft, childTop);
+                }
+
+            return new Size(rightMost - minLeft, bottomMost - minTop);
+        }
+        
         #endregion // MeasureOverride
 
         #endregion // Host Event Handlers

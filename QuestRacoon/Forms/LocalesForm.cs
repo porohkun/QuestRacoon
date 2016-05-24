@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     public partial class LocalesForm : Form
     {

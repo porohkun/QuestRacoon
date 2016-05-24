@@ -27,6 +27,21 @@ namespace QuestRacoonWpf.Quest
             return p1.X != p2.X || p1.Y != p2.Y;
         }
 
+        public static Point operator +(Point p1, Point p2)
+        {
+            return new Point(p1.X + p2.X, p1.Y + p2.Y);
+        }
+
+        public static Point operator -(Point p1, Point p2)
+        {
+            return new Point(p1.X - p2.X, p1.Y - p2.Y);
+        }
+
+        public static implicit operator Point(System.Windows.Point p)
+        {
+            return new Point(p.X, p.Y);
+        }
+        
         public override bool Equals(object obj)
         {
             if (!(obj is Point)) return false;

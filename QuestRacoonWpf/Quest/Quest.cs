@@ -77,6 +77,11 @@ namespace QuestRacoonWpf.Quest
             }
         }
 
+        public void DropEdited()
+        {
+            Edited = false;
+        }
+
         public void AddLocale(string locale)
         {
             Edited = true;

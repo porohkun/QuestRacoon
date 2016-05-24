@@ -10,6 +10,7 @@ using System.Globalization;
 using System.Threading;
 using PNetJson;
 using System.IO;
+using System.Windows;
 
 namespace QuestRacoonWpf
 {
@@ -18,9 +19,11 @@ namespace QuestRacoonWpf
         public bool FirstStart { get; private set; }
         public string LastOpenedFile { get { return _recentFiles.Count > 0 ? _recentFiles[0] : ""; } }
         public IEnumerable<string> RecentFiles { get { foreach (var file in _recentFiles) yield return file; } }
-        
+        public Rect BlockEditWindowStartupLocation { get { return _blockEditWindowStartupLocation; }  set { _blockEditWindowStartupLocation = value; SaveSettings(); } }
+
         //public string Locale { get { return Thread.CurrentThread.CurrentUICulture.ToString(); } }
 
+        private Rect _blockEditWindowStartupLocation = Rect.Empty;
         private List<string> _recentFiles = new List<string>();
 
         private string _path = Path.Combine(QR.AppDataPath, "settings.json");
@@ -63,6 +66,11 @@ namespace QuestRacoonWpf
                 FirstStart = settings["first_start"];
             if (settings.Obj.ContainsKey("recent_files"))
                 _recentFiles.AddRange(settings["recent_files"].DynamicCast<string>());
+            if (settings.Obj.ContainsKey("block_edit_window_startup_location"))
+            {
+                var bewsl = settings["block_edit_window_startup_location"];
+                _blockEditWindowStartupLocation = new Rect(bewsl["left"], bewsl["top"], bewsl["width"], bewsl["height"]);
+            }
         }
 
         public JSONValue ExportSettings()
@@ -70,7 +78,12 @@ namespace QuestRacoonWpf
             JSONValue result = new JSONValue(new JSONObject(
                 new JOPair("first_start", false),
                 new JOPair("last_version", QR.CurrentVersion),
-                new JOPair("recent_files", new JSONArray(_recentFiles.DynamicCast<JSONValue>().ToArray()))
+                new JOPair("recent_files", new JSONArray(_recentFiles.DynamicCast<JSONValue>().ToArray())),
+                new JOPair("block_edit_window_startup_location",new JSONObject(
+                    new JOPair("left",BlockEditWindowStartupLocation.Left),
+                    new JOPair("top", BlockEditWindowStartupLocation.Top),
+                    new JOPair("width", BlockEditWindowStartupLocation.Width),
+                    new JOPair("height", BlockEditWindowStartupLocation.Height)))
                 ));
             return result;
         }

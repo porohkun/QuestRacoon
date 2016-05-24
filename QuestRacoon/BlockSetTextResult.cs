@@ -1,4 +1,4 @@
-﻿namespace QuestRacoon
+﻿namespace QuestRacoonWpf
 {
     public enum BlockSetTextResult
     {

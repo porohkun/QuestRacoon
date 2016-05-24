@@ -89,6 +89,11 @@ namespace QuestRacoonWpf.Quest
             }
         }
 
+        internal void Delete()
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Match> GetRawLinks(string locale)
         {
             Regex reg = new Regex(@"\[\[[\w ]+\|[\w ]+\]\]");

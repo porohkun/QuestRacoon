@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     public partial class Block : UserControl
     {

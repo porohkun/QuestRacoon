@@ -1,4 +1,4 @@
-﻿namespace QuestRacoon
+﻿namespace QuestRacoonWpf
 {
     partial class LocalesForm_future
     {

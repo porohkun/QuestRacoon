@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QuestRacoon.Properties {
+namespace QuestRacoonWpf.Properties {
     using System;
     
     

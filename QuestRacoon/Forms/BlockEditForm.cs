@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     public partial class BlockEditForm : Form
     {
@@ -61,6 +61,7 @@ namespace QuestRacoon
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            
             if (!_first)
             {
                 Location = _startLocation;

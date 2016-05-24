@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Cyotek.Windows.Forms;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     [ToolboxItem(true)]
     public class ShowControl : VirtualScrollableControl

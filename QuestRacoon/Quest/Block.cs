@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using PNetJson;
 
-namespace QuestRacoon.Quest
+namespace QuestRacoonWpf.Quest
 {
     public class Block
     {

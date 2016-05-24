@@ -1,35 +1,139 @@
-﻿<Window x:Class="QuestRacoonWpf.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuestRacoonWpf"
+        x:Class="QuestRacoonWpf.MainWindow"
         mc:Ignorable="d"
-        Title="Quest Racoon" Height="366.092" Width="551.149">
+        Title="Quest Racoon" Height="366.092" Width="551.149"
+        Icon="..\Icons\icon.ico">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <ToolBar>
-            <ToggleButton Name="btnAllowDragging" IsChecked="True" Content="Allow Dragging" Margin="2,0" />
+
+        <Menu VerticalAlignment="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New Quest" Click="menuItem_NewQuestClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\new.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Open Quest" Click="menuItem_OpenQuestClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\open.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="openRecentMenuItem" Header="Open _Recent"/>
+                <Separator />
+                <MenuItem Header="_Save Quest" Click="menuItem_SaveQuestClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\disk.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save Quest _As..." Click="menuItem_SaveAsClick"/>
+                <Separator />
+                <MenuItem Header="E_xit" Click="menuItem_ExitClick"/>
+            </MenuItem>
+            <MenuItem Header="_Edit" >
+                <MenuItem Header="_Undo" Click="menuItem_UndoClick" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\undo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="_Redo" Click="menuItem_RedoClick" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\redo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Cut" IsEnabled="False"/>
+                <MenuItem Header="C_opy" IsEnabled="False"/>
+                <MenuItem Header="_Paste" IsEnabled="False"/>
+                <MenuItem Header="_Delete" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem Header="_Quest" >
+                <MenuItem Header="_Play" Click="menuItem_PlayClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\play.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="_Locales" Click="menuItem_LocalesClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\locales.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help" >
+                <MenuItem Header="_About" Click="menuItem_AboutClick">
+                    <MenuItem.Icon>
+                        <Image Source="..\Icons\icon16.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <ToolBar Grid.Row="1">
+            <Button ToolTip="New Quest" Click="menuItem_NewQuestClick">
+                <Image Source="..\Icons\new.png"/>
+            </Button>
+            <Button ToolTip="Open Quest" Click="menuItem_OpenQuestClick">
+                <Image Source="..\Icons\open.png"/>
+            </Button>
+            <Button ToolTip="Save Quest" Click="menuItem_SaveQuestClick">
+                <Image Source="..\Icons\disk.png"/>
+            </Button>
             <Separator />
-            <ToggleButton Name="btnAllowDragOutOfView" Content="Allow Drag Out Of View" Margin="2,0" />
+            <Button ToolTip="Undo" Click="menuItem_UndoClick" IsEnabled="False">
+                <Image Source="..\Icons\undo.png"/>
+            </Button>
+            <Button ToolTip="Redo" Click="menuItem_RedoClick" IsEnabled="False">
+                <Image Source="..\Icons\redo.png"/>
+            </Button>
             <Separator />
-            <ToggleButton Name="btnOnlyShowOffsetIndicators" Content="Only Show Offset Indicators" Margin="2,0" />
+            <Button ToolTip="Locales" Click="menuItem_LocalesClick">
+                <Image Source="..\Icons\locales.png"/>
+            </Button>
+            <Separator />
+            <Button ToolTip="Play" Click="menuItem_PlayClick">
+                <Image Source="..\Icons\play.png"/>
+            </Button>
         </ToolBar>
 
-        <ScrollViewer x:Name="scrollViewer" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
-                      MouseDown="ScrollViewer_MouseDown" MouseUp="ScrollViewer_MouseUp" MouseMove="ScrollViewer_MouseMove">
+        <ScrollViewer x:Name="scrollViewer" Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      MouseDown="ScrollViewer_MouseDown" MouseUp="ScrollViewer_MouseUp" MouseMove="ScrollViewer_MouseMove"
+                      ContextMenuService.IsEnabled="False" Background="{DynamicResource {x:Static SystemColors.ControlDarkBrushKey}}">
             <ScrollViewer.ContextMenu>
-                    <ContextMenu ContextMenuOpening="ContextMenu_ContextMenuOpening">
-                        <MenuItem Header="New block" Name="menuItemNewBlock" Click="menuItemNewBlock_Click"/>
-                    </ContextMenu>
-                </ScrollViewer.ContextMenu>
-            <local:DragCanvas  x:Name="dragCanvas" 
-                              AllowDragging="{Binding ElementName=btnAllowDragging, Path=IsChecked}"
-                              AllowDragOutOfView="{Binding ElementName=btnAllowDragOutOfView, Path=IsChecked}">
-                <local:FlowBlock Canvas.Left="226" Canvas.Top="133"/>
+                <ContextMenu>
+                    <MenuItem Header="New block" x:Name="menuItemNewBlock" Click="menuItemNewBlock_Click"/>
+                </ContextMenu>
+            </ScrollViewer.ContextMenu>
+            <ScrollViewer.Template>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="Corner" Grid.Column="1" Fill="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Grid.Row="1"/>
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" CanHorizontallyScroll="False" CanVerticallyScroll="False" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+                        <ScrollBar x:Name="PART_VerticalScrollBar" ContextMenuService.IsEnabled="False" AutomationProperties.AutomationId="VerticalScrollBar" Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportHeight}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" ContextMenuService.IsEnabled="False" AutomationProperties.AutomationId="HorizontalScrollBar" Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" Minimum="0" Orientation="Horizontal" Grid.Row="1" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" ViewportSize="{TemplateBinding ViewportWidth}"/>
+                    </Grid>
+                </ControlTemplate>
+            </ScrollViewer.Template>
+            <local:DragCanvas  x:Name="dragCanvas"
+                               AllowDragging="{Binding IsChecked, ElementName=btnAllowDragging}"
+                               AllowDragOutOfView="{Binding IsChecked, ElementName=btnAllowDragOutOfView}" Background="Transparent">
+                <local:Arrow x:Name="arrow" Stroke="{DynamicResource {x:Static SystemColors.ActiveCaptionTextBrushKey}}" StrokeThickness="2"/>
             </local:DragCanvas>
         </ScrollViewer>
     </Grid>

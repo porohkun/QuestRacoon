@@ -1,4 +1,4 @@
-﻿namespace QuestRacoon
+﻿namespace QuestRacoonWpf
 {
     partial class MainForm
     {
@@ -66,7 +66,7 @@
             this.undoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.localesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.workspace = new QuestRacoon.WorkspaceControl();
+            this.workspace = new QuestRacoonWpf.WorkspaceControl();
             this.mainMenuStrip.SuspendLayout();
             this.mainToolStrip.SuspendLayout();
             this.workspaceContextMenu.SuspendLayout();
@@ -244,7 +244,7 @@
             // newQuestToolStripButton
             // 
             this.newQuestToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newQuestToolStripButton.Image = global::QuestRacoon.Properties.Resources.new_document;
+            this.newQuestToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.new_document;
             this.newQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.newQuestToolStripButton.Name = "newQuestToolStripButton";
             this.newQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -254,7 +254,7 @@
             // openQuestToolStripButton
             // 
             this.openQuestToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openQuestToolStripButton.Image = global::QuestRacoon.Properties.Resources.open_document;
+            this.openQuestToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.open_document;
             this.openQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openQuestToolStripButton.Name = "openQuestToolStripButton";
             this.openQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -264,7 +264,7 @@
             // saveQuestToolStripButton
             // 
             this.saveQuestToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.saveQuestToolStripButton.Image = global::QuestRacoon.Properties.Resources.disk;
+            this.saveQuestToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.disk;
             this.saveQuestToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveQuestToolStripButton.Name = "saveQuestToolStripButton";
             this.saveQuestToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -275,7 +275,7 @@
             // 
             this.undoToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.undoToolStripButton.Enabled = false;
-            this.undoToolStripButton.Image = global::QuestRacoon.Properties.Resources.arrow_left;
+            this.undoToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.arrow_left;
             this.undoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoToolStripButton.Name = "undoToolStripButton";
             this.undoToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -285,7 +285,7 @@
             // 
             this.redoToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.redoToolStripButton.Enabled = false;
-            this.redoToolStripButton.Image = global::QuestRacoon.Properties.Resources.arrow_right;
+            this.redoToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.arrow_right;
             this.redoToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redoToolStripButton.Name = "redoToolStripButton";
             this.redoToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -294,7 +294,7 @@
             // localesToolStripButton
             // 
             this.localesToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.localesToolStripButton.Image = global::QuestRacoon.Properties.Resources.locale;
+            this.localesToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.locale;
             this.localesToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.localesToolStripButton.Name = "localesToolStripButton";
             this.localesToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -307,7 +307,7 @@
             this.updArrowsToolStripButton.CheckOnClick = true;
             this.updArrowsToolStripButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.updArrowsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.updArrowsToolStripButton.Image = global::QuestRacoon.Properties.Resources.node_select_all_icon;
+            this.updArrowsToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.node_select_all_icon;
             this.updArrowsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.updArrowsToolStripButton.Name = "updArrowsToolStripButton";
             this.updArrowsToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -317,7 +317,7 @@
             // playToolStripButton
             // 
             this.playToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.playToolStripButton.Image = global::QuestRacoon.Properties.Resources.Play_icon;
+            this.playToolStripButton.Image = global::QuestRacoonWpf.Properties.Resources.Play_icon;
             this.playToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.playToolStripButton.Name = "playToolStripButton";
             this.playToolStripButton.Size = new System.Drawing.Size(23, 22);
@@ -326,7 +326,7 @@
             // 
             // newQuestToolStripMenuItem
             // 
-            this.newQuestToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.new_document;
+            this.newQuestToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.new_document;
             this.newQuestToolStripMenuItem.Name = "newQuestToolStripMenuItem";
             this.newQuestToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.newQuestToolStripMenuItem.Text = "New Quest";
@@ -334,7 +334,7 @@
             // 
             // openQuestToolStripMenuItem
             // 
-            this.openQuestToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.open_document;
+            this.openQuestToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.open_document;
             this.openQuestToolStripMenuItem.Name = "openQuestToolStripMenuItem";
             this.openQuestToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.openQuestToolStripMenuItem.Text = "Open Quest";
@@ -342,7 +342,7 @@
             // 
             // saveQuestToolStripMenuItem
             // 
-            this.saveQuestToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.disk;
+            this.saveQuestToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.disk;
             this.saveQuestToolStripMenuItem.Name = "saveQuestToolStripMenuItem";
             this.saveQuestToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.saveQuestToolStripMenuItem.Text = "Save Quest";
@@ -351,7 +351,7 @@
             // undoToolStripMenuItem
             // 
             this.undoToolStripMenuItem.Enabled = false;
-            this.undoToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.arrow_left;
+            this.undoToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.arrow_left;
             this.undoToolStripMenuItem.Name = "undoToolStripMenuItem";
             this.undoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.undoToolStripMenuItem.Text = "Undo";
@@ -359,14 +359,14 @@
             // redoToolStripMenuItem
             // 
             this.redoToolStripMenuItem.Enabled = false;
-            this.redoToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.arrow_right;
+            this.redoToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.arrow_right;
             this.redoToolStripMenuItem.Name = "redoToolStripMenuItem";
             this.redoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.redoToolStripMenuItem.Text = "Redo";
             // 
             // localesToolStripMenuItem
             // 
-            this.localesToolStripMenuItem.Image = global::QuestRacoon.Properties.Resources.locale;
+            this.localesToolStripMenuItem.Image = global::QuestRacoonWpf.Properties.Resources.locale;
             this.localesToolStripMenuItem.Name = "localesToolStripMenuItem";
             this.localesToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.localesToolStripMenuItem.Text = "Locales";

@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
     public class Arrow : Control
     {

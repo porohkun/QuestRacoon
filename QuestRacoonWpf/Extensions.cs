@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
+using System.Windows;
 
 namespace QuestRacoonWpf
 {
@@ -19,17 +19,17 @@ namespace QuestRacoonWpf
             return new Point(thisPoint.X - point.X, thisPoint.Y - point.Y);
         }
 
-        public static Point GetCenter(this Rectangle rect)
+        public static Point GetCenter(this Rect rect)
         {
             return new Point(rect.X + rect.Width / 2, rect.Y + rect.Height / 2);
         }
 
-        public static Point IntersectsFromCenter(this Rectangle rect, Point end)
+        public static Point IntersectsFromCenter(this Rect rect, Point end)
         {
             Point start = rect.GetCenter();
-            Vector2 delta = new Vector2(start, end);
+            Point delta = end.Subtract(start);
 
-            float side;
+            double side;
 
             if (Math.Abs(delta.X) > Math.Abs(delta.Y)) //Left/Right
             {

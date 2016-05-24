@@ -1,4 +1,4 @@
-﻿namespace QuestRacoon
+﻿namespace QuestRacoonWpf
 {
     partial class RunForm
     {
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.show = new QuestRacoon.ShowControl();
+            this.show = new QuestRacoonWpf.ShowControl();
             this.SuspendLayout();
             // 
             // show

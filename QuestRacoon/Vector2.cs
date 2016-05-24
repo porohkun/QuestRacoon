@@ -1,7 +1,7 @@
 using System;
 using System.Drawing;
 
-namespace QuestRacoon
+namespace QuestRacoonWpf
 {
 	/// <summary>
 	/// Basic geometry class : easy to replace
