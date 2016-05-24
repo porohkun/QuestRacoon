@@ -90,7 +90,9 @@ namespace QuestRacoonWpf
             //        }
             //        break;
             //}
-            
+
+            QR.Set.BlockEditWindowStartupLocation = new Rect(Left, Top, Width, Height);
+
             base.OnClosing(e);
         }
     }

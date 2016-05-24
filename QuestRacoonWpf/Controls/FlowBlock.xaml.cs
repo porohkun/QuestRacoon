@@ -36,7 +36,7 @@ namespace QuestRacoonWpf
                 if (_block.Locales.Contains(value))
                 {
                     _selectedLocale = value;
-                    _block_TextChanged(_block.GetRawText(_selectedLocale));
+                    _block_TextChanged(_selectedLocale);
                     //CheckLinks();
                 }
             }
@@ -62,7 +62,7 @@ namespace QuestRacoonWpf
             _block = block;
             _block.NameChanged += _block_NameChanged;
             _block.TextChanged += _block_TextChanged;
-            _block_NameChanged();
+            headerText.Content = _block.Name;
         }
 
         public void SetPosition(double left,double top)
@@ -70,14 +70,22 @@ namespace QuestRacoonWpf
             _block.SetLocation(new Quest.Point(left, top));
         }
 
-        private void _block_TextChanged(string text)
+        private void _block_TextChanged(string locale)
         {
-            captionText.Content = text;
+            if (locale == SelectedLocale)
+            {
+                captionText.Content = _block.GetRawText(locale);
+                CheckLinks();
+            }
         }
 
         private void _block_NameChanged()
         {
             headerText.Content = _block.Name;
+            foreach (var block in (Parent as DragCanvas).GetBlocks())
+            {
+                block.CheckLinks();
+            }
         }
 
         private void menuItemEdit_Click(object sender, RoutedEventArgs e)
@@ -126,6 +134,7 @@ namespace QuestRacoonWpf
                     {
                         var arrow = new Arrow();
                         workspace.Children.Add(arrow);
+                        Canvas.SetZIndex(arrow, -1);
                         arrow.SetEnds(this, endlink);
                         _links.Add(arrow);
                         if (_brokenLinks.Contains(link))

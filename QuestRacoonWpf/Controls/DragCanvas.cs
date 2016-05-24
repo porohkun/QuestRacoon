@@ -360,7 +360,10 @@ namespace QuestRacoonWpf
 
             var block = ElementBeingDragged as FlowBlock;
             if (block != null)
+            {
                 block.Move();
+                block.SetPosition(newHorizontalOffset, newVerticalOffset);
+            }
         }
 
         #endregion // OnPreviewMouseMove

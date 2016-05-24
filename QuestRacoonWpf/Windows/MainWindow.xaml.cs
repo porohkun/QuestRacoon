@@ -28,11 +28,24 @@ namespace QuestRacoonWpf
 
         private Quest.Quest _quest;
         private string _questPath = "";
+        private string QuestPath
+        {
+            get { return _questPath; }
+            set
+            {
+                _questPath = value;
+                Title = string.Format("Quest Racoon v{0}{1}", QR.CurrentVersion,
+                    _questPath == "" ?
+                    "" :
+                    string.Format(" - {0}{1}", _quest.Edited ? "* " : "", System.IO.Path.GetFileName(_questPath)));
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
             _quest = new Quest.Quest();
+            LinkQuest(_quest);
             UpdateRecent();
         }
         
@@ -108,24 +121,9 @@ namespace QuestRacoonWpf
                 CancelScrolling();
         }
         
-        FlowBlock _b1;
-        FlowBlock _b2;
-
         private void menuItemNewBlock_Click(object sender, RoutedEventArgs e)
         {
-            var qblock = _quest.CreateBlock(_startPosition.Value + new Quest.Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset));
-            var block = new FlowBlock(qblock);
-            block.SelectedLocale = _quest.MainLocale;
-            dragCanvas.AddBlock(block);
-
-            if (_b1 == null)
-                _b1 = block;
-            else if (_b2 == null)
-            {
-                _b2 = block;
-                arrow.ArrowEnds = ArrowEnds.Both;
-                arrow.SetEnds(_b1, _b2);
-            }
+            _quest.CreateBlock(_startPosition.Value + new Quest.Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset));
         }
 
         #region Menu
@@ -136,7 +134,7 @@ namespace QuestRacoonWpf
             {
                 _quest = new Quest.Quest();
                 LinkQuest(_quest);
-                _questPath = "";
+                QuestPath = "";
             }
         }
 
@@ -226,7 +224,7 @@ namespace QuestRacoonWpf
             //{
                 _quest = new Quest.Quest(PNetJson.JSONValue.Load(filename));
                 LinkQuest(_quest);
-                _questPath = filename;
+                QuestPath = filename;
                 UpdateRecent(filename);
             //}
             //catch (Exception ex)
@@ -252,9 +250,9 @@ namespace QuestRacoonWpf
         {
             try
             {
-                if (_questPath != "")
+                if (QuestPath != "")
                 {
-                    _quest.ToJson().Save(_questPath, false);
+                    _quest.ToJson().Save(QuestPath, false);
                     return true;
                 }
                 else
@@ -278,9 +276,9 @@ namespace QuestRacoonWpf
                 try
                 {
                     var filename = saveQuestDialog.FileName;
-                    _questPath = System.IO.Path.ChangeExtension(filename, "qrc");
-                    _quest.ToJson().Save(_questPath, false);
-                    UpdateRecent(_questPath);
+                    QuestPath = System.IO.Path.ChangeExtension(filename, "qrc");
+                    _quest.ToJson().Save(QuestPath, false);
+                    UpdateRecent(QuestPath);
                     return true;
                 }
                 catch (Exception ex)
@@ -335,5 +333,12 @@ namespace QuestRacoonWpf
             dragCanvas.AddBlock(block);
         }
 
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (!CheckSaved(_quest))
+                e.Cancel = true;
+            else
+                QR.Set.SaveSettings();
+        }
     }
 }
