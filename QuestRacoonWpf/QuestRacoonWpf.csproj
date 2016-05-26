@@ -39,6 +39,10 @@
     <ApplicationIcon>Icons\icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.3\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -60,6 +64,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Operators\DescriptionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="src\SyntaxHighlightBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Windows\BlockEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -76,6 +88,32 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controls\Operators\DescriptionControl.xaml.cs">
+      <DependentUpon>DescriptionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IOperatorControl.cs" />
+    <Compile Include="Quest\LocalizedText.cs" />
+    <Compile Include="Quest\Operators\Assignment.cs" />
+    <Compile Include="Quest\Operators\Condition.cs" />
+    <Compile Include="Quest\Operators\ConditionElse.cs" />
+    <Compile Include="Quest\Operators\ConditionEnd.cs" />
+    <Compile Include="Quest\Operators\Description.cs" />
+    <Compile Include="Quest\IOperator.cs" />
+    <Compile Include="Lancer1WPF\ArrangePanel.cs" />
+    <Compile Include="Lancer1WPF\DataItem.cs" />
+    <Compile Include="Lancer1WPF\ILayoutStrategy.cs" />
+    <Compile Include="Lancer1WPF\ListLayoutStrategy.cs" />
+    <Compile Include="Lancer1WPF\TableLayoutStrategy.cs" />
+    <Compile Include="Lancer1WPF\TestDataSource.cs" />
+    <Compile Include="Quest\Operators\Speech.cs" />
+    <Compile Include="Quest\OperatorType.cs" />
+    <Compile Include="src\DrawingControl.cs" />
+    <Compile Include="src\HighlighterManager.cs" />
+    <Compile Include="src\IHighlighter.cs" />
+    <Compile Include="src\SyntaxHighlightBox.xaml.cs">
+      <DependentUpon>SyntaxHighlightBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="src\TextUtilities.cs" />
     <Compile Include="Windows\BlockEditWindow.xaml.cs">
       <DependentUpon>BlockEditWindow.xaml</DependentUpon>
     </Compile>
@@ -89,7 +127,7 @@
     </Compile>
     <Compile Include="QR.cs" />
     <Compile Include="Quest\Block.cs" />
-    <Compile Include="Quest\Link.cs" />
+    <Compile Include="Quest\Operators\Link.cs" />
     <Compile Include="Quest\Point.cs" />
     <Compile Include="Quest\Quest.cs" />
     <Compile Include="Settings.cs" />
@@ -116,11 +154,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="resources\syntax.xsd">
+      <SubType>Designer</SubType>
+    </Resource>
+    <None Include="src\CodeBox.xaml.cs.orig" />
+    <None Include="src\CodeBox.xaml.orig" />
+    <None Include="src\TextUtilities.cs.orig" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,6 +191,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\icon16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\cross.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\MyNewSyntax.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="resources\VHDL.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

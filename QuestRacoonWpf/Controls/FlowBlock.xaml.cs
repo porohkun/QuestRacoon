@@ -33,12 +33,8 @@ namespace QuestRacoonWpf
             get { return _selectedLocale; }
             set
             {
-                if (_block.Locales.Contains(value))
-                {
-                    _selectedLocale = value;
-                    _block_TextChanged(_selectedLocale);
-                    //CheckLinks();
-                }
+                _selectedLocale = value;
+                _block_OperatorsChanged();
             }
         }
 
@@ -61,7 +57,7 @@ namespace QuestRacoonWpf
         {
             _block = block;
             _block.NameChanged += _block_NameChanged;
-            _block.TextChanged += _block_TextChanged;
+            _block.OperatorsChanged += _block_OperatorsChanged;
             headerText.Content = _block.Name;
         }
 
@@ -70,13 +66,10 @@ namespace QuestRacoonWpf
             _block.SetLocation(new Quest.Point(left, top));
         }
 
-        private void _block_TextChanged(string locale)
+        private void _block_OperatorsChanged()
         {
-            if (locale == SelectedLocale)
-            {
-                captionText.Content = _block.GetRawText(locale);
-                CheckLinks();
-            }
+            captionText.Content = _block.GetRawText(SelectedLocale);
+            CheckLinks();
         }
 
         private void _block_NameChanged()
@@ -95,7 +88,7 @@ namespace QuestRacoonWpf
 
         private void menuItemDelete_Click(object sender, RoutedEventArgs e)
         {
-            _block.Delete();
+            _block.DeleteBlock();
         }
 
         private void flowBlock_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -112,7 +105,7 @@ namespace QuestRacoonWpf
         
         public void CheckLinks()
         {
-            var links = new List<string>(_block.GetLinks(SelectedLocale));
+            var links = new List<string>(from op in _block where op is Link select (op as Link).To);
             var forDel = new List<Arrow>();
             var workspace = Parent as DragCanvas;
             if (workspace == null) return;

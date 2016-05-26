@@ -43,26 +43,26 @@ namespace QuestRacoonWpf
             Title = _block.Name;
             headerBox.Text = _block.Name;
 
-            foreach (var loc in _block.Locales)
-            {
-                _texts.Add(loc, _block.GetRawText(loc));
+            //foreach (var loc in _block.Locales)
+            //{
+            //    _texts.Add(loc, _block.GetRawText(loc));
 
-                var locloc = loc;
-                //var tsButton = (toolStrip.Items.Add(loc, null, (sender, e) => { SwitchLocale(locloc); }) as ToolStripButton);
-                //_localeButtons.Add(tsButton);
-                //tsButton.CheckOnClick = true;
-                //if (loc == locale)
-                //    tsButton.Checked = true;
-            }
+            //    var locloc = loc;
+            //    //var tsButton = (toolStrip.Items.Add(loc, null, (sender, e) => { SwitchLocale(locloc); }) as ToolStripButton);
+            //    //_localeButtons.Add(tsButton);
+            //    //tsButton.CheckOnClick = true;
+            //    //if (loc == locale)
+            //    //    tsButton.Checked = true;
+            //}
             SwitchLocale(locale);
         }
 
         private void SwitchLocale(string locale)
         {
-            if (_locale != null && _texts.ContainsKey(_locale))
-                _texts[_locale] = textBox.Text;
+            //if (_locale != null && _texts.ContainsKey(_locale))
+            //    _texts[_locale] = textBox.Text;
             _locale = locale;
-            textBox.Text = _texts[_locale];
+            //textBox.Text = _texts[_locale];
 
             //foreach (var btn in _localeButtons)
             //    btn.Checked = btn.Text == locale;
@@ -70,9 +70,9 @@ namespace QuestRacoonWpf
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            _texts[_locale] = textBox.Text;
-            foreach (var loc in _texts.Keys)
-                _block.SetRawText(loc, _texts[loc]);
+            //_texts[_locale] = textBox.Text;
+            //foreach (var loc in _texts.Keys)
+            //    _block.SetRawText(loc, _texts[loc]);
 
             _block.SetName(headerBox.Text);
             //switch (_block.SetText(textBox.Text))
@@ -94,6 +94,11 @@ namespace QuestRacoonWpf
             QR.Set.BlockEditWindowStartupLocation = new Rect(Left, Top, Width, Height);
 
             base.OnClosing(e);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            operators.Children.Add(new Label() { Content = "gggggggg" });
         }
     }
 }

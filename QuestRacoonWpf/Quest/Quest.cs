@@ -54,7 +54,7 @@ namespace QuestRacoonWpf.Quest
 
         public Block CreateBlock(Point location, string name)
         {
-            var block = new Block(location, name, Locales);
+            var block = new Block(location, name);
             block.Edited += blockEdited;
             _blocks.Add(block);
             BlockAdded?.Invoke(block);
@@ -86,8 +86,8 @@ namespace QuestRacoonWpf.Quest
         {
             Edited = true;
             _locales.Add(locale);
-            foreach (var block in _blocks)
-                block.CloneLocale(MainLocale, locale);
+            //foreach (var block in _blocks)
+            //    block.CloneLocale(MainLocale, locale);
         }
 
         public void DeleteLocale(string locale)
