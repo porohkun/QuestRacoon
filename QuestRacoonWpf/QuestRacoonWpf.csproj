@@ -68,10 +68,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="src\SyntaxHighlightBox.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Windows\BlockEditWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,13 +103,6 @@
     <Compile Include="Lancer1WPF\TestDataSource.cs" />
     <Compile Include="Quest\Operators\Speech.cs" />
     <Compile Include="Quest\OperatorType.cs" />
-    <Compile Include="src\DrawingControl.cs" />
-    <Compile Include="src\HighlighterManager.cs" />
-    <Compile Include="src\IHighlighter.cs" />
-    <Compile Include="src\SyntaxHighlightBox.xaml.cs">
-      <DependentUpon>SyntaxHighlightBox.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="src\TextUtilities.cs" />
     <Compile Include="Windows\BlockEditWindow.xaml.cs">
       <DependentUpon>BlockEditWindow.xaml</DependentUpon>
     </Compile>
@@ -154,18 +143,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="CustomHighlighting.xshd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="resources\syntax.xsd">
-      <SubType>Designer</SubType>
-    </Resource>
-    <None Include="src\CodeBox.xaml.cs.orig" />
-    <None Include="src\CodeBox.xaml.orig" />
-    <None Include="src\TextUtilities.cs.orig" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -195,13 +179,7 @@
   <ItemGroup>
     <Resource Include="Icons\cross.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="resources\MyNewSyntax.xml" />
-  </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="resources\VHDL.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

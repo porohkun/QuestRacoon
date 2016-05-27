@@ -29,5 +29,11 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="LargeButton">
+            <Setter Property="Control.FontFamily" Value="Calibri"></Setter>
+            <Setter Property="Control.FontSize" Value="14.667"></Setter>
+            <Setter Property="Control.VerticalContentAlignment" Value="Top"></Setter>
+            <Setter Property="Control.Focusable" Value="False"></Setter>
+        </Style>
     </Application.Resources>
 </Application>

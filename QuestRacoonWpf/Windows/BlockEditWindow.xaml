@@ -12,7 +12,7 @@
         <Border Margin="10,38,115,10" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
             <ScrollViewer>
                 <lancer:ArrangePanel x:Name="operators" VerticalAlignment="Top">
-                    <local:DescriptionControl/>
+                    <Label/>
                 </lancer:ArrangePanel>
             </ScrollViewer>
         </Border>
@@ -24,13 +24,13 @@
             </Grid.RowDefinitions>
         </Grid>
         <StackPanel HorizontalAlignment="Right" Width="100" Margin="0,38,10,10">
-            <Button Content="Description" Margin="0,2" Click="Button_Click"/>
-            <Button Content="Speech" Margin="0,2"/>
-            <Button Content="Link" Margin="0,2"/>
-            <Button Content="Assignment" Margin="0,2"/>
-            <Button Content="Condition" Margin="0,2"/>
-            <Button Content="Else" Margin="0,2"/>
-            <Button Content="End" Margin="0,2"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Description"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Speech"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Link"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Assignment"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Condition"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Else"/>
+            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="End"/>
         </StackPanel>
     </Grid>
 </Window>

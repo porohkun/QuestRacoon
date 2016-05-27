@@ -14,6 +14,8 @@ namespace QuestRacoonWpf.Quest
 
         public Action Edited { get; set; }
 
+        public OperatorType Type { get { return OperatorType.Speech; } }
+
         public Speech(string character)
         {
             _character = character;

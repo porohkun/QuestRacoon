@@ -7,6 +7,6 @@ namespace QuestRacoonWpf
 {
     public interface IOperatorControl
     {
-
+        string Locale { get; set; }
     }
 }

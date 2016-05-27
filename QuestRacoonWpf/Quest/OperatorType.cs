@@ -7,6 +7,12 @@ namespace QuestRacoonWpf.Quest
 {
     public enum OperatorType
     {
-
+        Assignment,
+        Condition,
+        ConditionElse,
+        ConditionEnd,
+        Description,
+        Link,
+        Speech
     }
 }

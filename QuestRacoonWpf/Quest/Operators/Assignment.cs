@@ -23,7 +23,9 @@ namespace QuestRacoonWpf.Quest
         }
 
         public Action Edited { get; set; }
-        
+
+        public OperatorType Type { get { return OperatorType.Assignment; } }
+
         public Assignment(string variable, string value)
         {
             _variable = variable;

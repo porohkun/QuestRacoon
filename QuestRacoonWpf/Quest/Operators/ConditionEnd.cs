@@ -11,6 +11,8 @@ namespace QuestRacoonWpf.Quest
 
         public Action Edited { get; set; }
 
+        public OperatorType Type { get { return OperatorType.ConditionEnd; } }
+
         public void DeleteLocale(string locale) { }
 
         public string GetText(string locale)

@@ -10,7 +10,9 @@ namespace QuestRacoonWpf.Quest
         private static string _value = "ELSE";
 
         public Action Edited { get; set; }
-        
+
+        public OperatorType Type { get { return OperatorType.ConditionElse; } }
+
         public void DeleteLocale(string locale) { }
 
         public string GetText(string locale)

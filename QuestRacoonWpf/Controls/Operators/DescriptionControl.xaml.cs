@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -11,6 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using ICSharpCode.AvalonEdit.Folding;
+using ICSharpCode.AvalonEdit.Highlighting;
+using System.Xml;
+using QuestRacoonWpf.Quest;
 
 namespace QuestRacoonWpf
 {
@@ -19,19 +25,52 @@ namespace QuestRacoonWpf
     /// </summary>
     public partial class DescriptionControl : UserControl, IOperatorControl
     {
+        private string _locale = "Default";
+        public string Locale { get { return _locale; } set { _locale = value; UpdateText(); } }
+        
         double _row0H = 0;
         double _row1H = 0;
+
+        private Description _description;
+
         public DescriptionControl()
         {
-            InitializeComponent();
+            if (HighlightingManager.Instance.HighlightingDefinitions.Count(d => d.Name == "Custom Highlighting") == 0)
+            {
+                IHighlightingDefinition customHighlighting;
+                using (Stream s = typeof(BlockEditWindow).Assembly.GetManifestResourceStream("QuestRacoonWpf.CustomHighlighting.xshd"))
+                {
+                    if (s == null)
+                        throw new InvalidOperationException("Could not find embedded resource");
+                    using (XmlReader reader = new XmlTextReader(s))
+                    {
+                        customHighlighting = ICSharpCode.AvalonEdit.Highlighting.Xshd.
+                            HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                    }
+                }
+                HighlightingManager.Instance.RegisterHighlighting("Custom Highlighting", new string[] { ".cool" }, customHighlighting);
+            }
 
-            //textBox.CurrentHighlighter = AurelienRibon.Ui.SyntaxHighlightBox.HighlighterManager.Instance.Highlighters["MyNewSyntax"];
+            InitializeComponent();
+            
+            textBox.SyntaxHighlighting = HighlightingManager.Instance.GetDefinition("Custom Highlighting");
+
             _row0H = row0.Height.Value;
             _row1H = row1.Height.Value;
             row0.Height = new GridLength(0);
             row1.Height = new GridLength(0);
         }
-        
+
+        public DescriptionControl(Description description):this()
+        {
+            _description = description;
+        }
+
+        private void UpdateText()
+        {
+            textBox.Text = _description.Text.GetText(_locale);
+        }
+
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
         {
             row0.Height = new GridLength(0);
@@ -43,8 +82,8 @@ namespace QuestRacoonWpf
         {
             row0.Height = new GridLength(_row0H);
             row1.Height = new GridLength(_row1H);
-            textBox.MaxHeight = 66;
-            textBox.Height = 66;
+            textBox.MaxHeight = 88;
+            textBox.Height = 88;
         }
         
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -53,22 +92,49 @@ namespace QuestRacoonWpf
 
             switch (action)
             {
-                case "{b}": break;
-                case "{i}": break;
-                case "{color}": break;
-                case "{s}": break;
-                case "{w}": InsertText("{w}"); break;
-                case "{wi}": break;
-                case "{wc}": break;
-                case "{c}": break;
-                case "{x}": break;
+                case "{b}": InsertAction("{b}", "{/b}"); break;
+                case "{i}": InsertAction("{i}", "{/i}"); break;
+                case "{color}": InsertAction("{color=red}", "{/color}", -4, 3); break;
+                case "{s}": InsertAction("{s=1}", "{/s}", -2, 1); break;
+                case "{w}": InsertAction("{w=1}", "{/w}",-2 ,1); break;
+                case "{wi}": InsertAction("{wi}"); break;
+                case "{wc}": InsertAction("{wc}"); break;
+                case "{c}": InsertAction("{c}"); break;
+                case "{x}": InsertAction("{x}"); break;
             }
         }
 
-        private void InsertText(string text)
+        private void InsertAction(string open, string close = "", int offset = 0, int length = 0)
         {
-            //textBox.selecti
-            
+            int start = textBox.SelectionStart;
+            int sLength = textBox.SelectionLength;
+            string[] text = new string[]
+            {
+                textBox.Text.Substring(0, start),
+                textBox.Text.Substring(start, sLength),
+                textBox.Text.Substring(start + sLength)
+            };
+            var sb = new StringBuilder();
+            sb.Append(text[0]);
+            sb.Append(open);
+            sb.Append(text[1]);
+            sb.Append(close);
+            sb.Append(text[2]);
+
+            start += open.Length + offset;
+
+            textBox.Text = sb.ToString();
+            textBox.Select(start, length);
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            _description.Delete();
+        }
+
+        private void textBox_TextChanged(object sender, EventArgs e)
+        {
+            _description.Text.SetText(textBox.Text, _locale);
         }
     }
 }

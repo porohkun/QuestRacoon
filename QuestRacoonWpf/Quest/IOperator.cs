@@ -7,6 +7,7 @@ namespace QuestRacoonWpf
 {
     public interface IOperator
     {
+        Quest.OperatorType Type { get; }
         Action Edited { get; set; }
 
         string GetText(string locale);

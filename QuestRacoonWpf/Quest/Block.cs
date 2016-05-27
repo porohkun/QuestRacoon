@@ -39,6 +39,7 @@ namespace QuestRacoonWpf.Quest
             Location = location;
             Name = name;
             _operators = new List<IOperator>();
+            Add(new Description());
             //foreach (var loc in locales)
             //    _rawTexts.Add(loc, "");
         }

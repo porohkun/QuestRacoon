@@ -125,6 +125,7 @@ namespace Lancer1WPF
                 if (double.IsNaN(position.Top))
                     position = GetDesiredPosition(child);
                 child.Arrange(position);
+                (child as FrameworkElement).MaxWidth = finalSize.Width;
             }
             return _strategy.ResultSize;
         }

@@ -18,5 +18,10 @@ namespace QuestRacoonWpf.Quest
         {
             throw new NotImplementedException();
         }
+
+        internal void SetText(string text, string locale)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

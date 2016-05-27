@@ -11,6 +11,8 @@ namespace QuestRacoonWpf.Quest
 
         public Action Edited { get; set; }
 
+        public OperatorType Type { get { return OperatorType.Description; } }
+
         public Description()
         {
             Text = new LocalizedText();
@@ -30,6 +32,11 @@ namespace QuestRacoonWpf.Quest
         public string GetText(string locale)
         {
             return Text.GetText(locale);
+        }
+
+        internal void Delete()
+        {
+            throw new NotImplementedException();
         }
     }
 }

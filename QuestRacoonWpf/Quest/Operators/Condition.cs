@@ -17,6 +17,8 @@ namespace QuestRacoonWpf.Quest
 
         public Action Edited { get; set; }
 
+        public OperatorType Type { get { return OperatorType.Condition; } }
+
         public Condition(string value)
         {
             _value = value;

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0"?>
+<SyntaxDefinition name="Custom Highlighting" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+	<RuleSet>
+    <!-- {b}[value]{/b} -->
+    <Rule fontWeight="bold" >
+      (?&#60;={b})(.*?)(?={\/b})
+    </Rule>
+
+    <!-- {i}[value]{/i} -->
+    <Rule fontStyle="italic" >
+      (?&#60;={i})(.*?)(?={\/i})
+    </Rule>
+
+
+    <Rule foreground="DarkRed" fontWeight="bold" fontStyle="normal" >
+      (?&#60;={color=)(\w*)(?=})    <!-- {color=[value]} -->
+    | (?&#60;={s=)(\d+(\.[0-9]+)?)(?=})    <!-- {s=[num]} -->
+    | (?&#60;={w=)(\d+(\.[0-9]+)?)(?=})    <!-- {w=[num]} -->
+    </Rule>
+
+    <Rule foreground="Blue" fontWeight="bold" fontStyle="normal" >
+      ({(b|/b|i|/i|/color|/s|w|/w|wi|wc|c|x)})    <!-- {b}{/b}{i}{/i}{/color}{/s}{w}{/w}{wi}{wc}{c}{x} -->
+    | (({color=)(?=(\w*)))    <!-- [{color=]value} -->
+    | (({s=)(?=(\d+(\.[0-9]+)?})))    <!-- [{s=]num} -->
+    | (({w=)(?=(\d+(\.[0-9]+)?})))    <!-- [{w=]num} -->
+    </Rule>
+
+    <Rule foreground="Blue" fontWeight="bold" fontStyle="normal" >
+      ((?&#60;=({color=(\w*)))})    <!-- {color=value[}] -->
+    | ((?&#60;=({s=(\d+(\.[0-9]+)?)))})    <!-- {s=num[}] -->
+    | ((?&#60;=({w=(\d+(\.[0-9]+)?)))})    <!-- {w=num[}] -->
+    </Rule>
+
+  </RuleSet>
+</SyntaxDefinition>

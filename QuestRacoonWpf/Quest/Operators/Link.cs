@@ -12,6 +12,8 @@ namespace QuestRacoonWpf.Quest
 
         public Action Edited { get; set; }
 
+        public OperatorType Type { get { return OperatorType.Link; } }
+
         public void DeleteLocale(string locale)
         {
             throw new NotImplementedException();

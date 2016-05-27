@@ -43,54 +43,41 @@ namespace QuestRacoonWpf
             Title = _block.Name;
             headerBox.Text = _block.Name;
 
-            //foreach (var loc in _block.Locales)
-            //{
-            //    _texts.Add(loc, _block.GetRawText(loc));
+            var firstOp = operators.Children[0];
 
-            //    var locloc = loc;
-            //    //var tsButton = (toolStrip.Items.Add(loc, null, (sender, e) => { SwitchLocale(locloc); }) as ToolStripButton);
-            //    //_localeButtons.Add(tsButton);
-            //    //tsButton.CheckOnClick = true;
-            //    //if (loc == locale)
-            //    //    tsButton.Checked = true;
-            //}
+            foreach (var op in _block)
+            {
+                UIElement opc = null;
+                switch (op.Type)
+                {
+                    case Quest.OperatorType.Assignment: break;
+                    case Quest.OperatorType.Condition: break;
+                    case Quest.OperatorType.ConditionElse: break;
+                    case Quest.OperatorType.ConditionEnd: break;
+                    case Quest.OperatorType.Description: opc = new DescriptionControl(op as Quest.Description); break;
+                    case Quest.OperatorType.Link: break;
+                    case Quest.OperatorType.Speech: break;
+                }
+                if (opc != null)
+                {
+                    operators.Children.Add(opc);
+                }
+            }
+
+            operators.Children.Remove(firstOp);
             SwitchLocale(locale);
         }
 
         private void SwitchLocale(string locale)
         {
-            //if (_locale != null && _texts.ContainsKey(_locale))
-            //    _texts[_locale] = textBox.Text;
             _locale = locale;
-            //textBox.Text = _texts[_locale];
-
-            //foreach (var btn in _localeButtons)
-            //    btn.Checked = btn.Text == locale;
+            foreach (IOperatorControl op in operators.Children)
+                op.Locale = locale;
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            //_texts[_locale] = textBox.Text;
-            //foreach (var loc in _texts.Keys)
-            //    _block.SetRawText(loc, _texts[loc]);
-
             _block.SetName(headerBox.Text);
-            //switch (_block.SetText(textBox.Text))
-            //{
-            //    case BlockSetTextResult.HeaderAbsent:
-            //        MessageBox.Show(this, "Please set header tag", "", MessageBoxButtons.OK);
-            //        e.Cancel = true;
-            //        break;
-            //    case BlockSetTextResult.NewLinks:
-            //        var result =MessageBox.Show(this, "Do you want to create new blocks to match broken links?", "", MessageBoxButtons.YesNoCancel);
-            //        switch (result)
-            //        {
-            //            case DialogResult.Yes: _block.FixBrokenLinks(); break;
-            //            case DialogResult.Cancel: e.Cancel = true; break;
-            //        }
-            //        break;
-            //}
-
             QR.Set.BlockEditWindowStartupLocation = new Rect(Left, Top, Width, Height);
 
             base.OnClosing(e);

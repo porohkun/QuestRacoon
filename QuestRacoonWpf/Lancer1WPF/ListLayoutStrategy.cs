@@ -8,14 +8,13 @@ namespace Lancer1WPF
 {
     public class ListLayoutStrategy : ILayoutStrategy
     {
-        private int _columnCount = 1;
-        private double[] _colWidths;
+        private double _colWidth;
         private readonly List<double> _rowHeights = new List<double>();
         private int _elementCount;
 
         public Size ResultSize
         {
-            get { return _colWidths!=null && _rowHeights.Any() ? new Size(_colWidths.Sum(), _rowHeights.Sum()) : new Size(0, 0); }
+            get { return _rowHeights.Any() ? new Size(_colWidth, _rowHeights.Sum()) : new Size(0, 0); }
         }
 
         public void Calculate(Size availableSize, Size[] measures)
@@ -27,64 +26,26 @@ namespace Lancer1WPF
         private void BaseCalculation(Size availableSize, Size[] measures)
         {
             _elementCount = measures.Length;
-            if (_colWidths==null || _colWidths.Length < _columnCount)
-                _colWidths = new double[_columnCount];
-            var calculating = true;
-            while (calculating)
-            {
-                calculating = false;
-                ResetSizes();
-                int row;
-                for (row = 0; row*_columnCount < measures.Length; row++)
-                {
-                    var rowHeight = 0.0;
-                    int col;
-                    for (col = 0; col < _columnCount; col++)
-                    {
-                        int i = row*_columnCount + col;
-                        if (i >= measures.Length) break;
-                        _colWidths[col] = availableSize.Width;//Math.Max(_colWidths[col], measures[i].Width);
-                        rowHeight = Math.Max(rowHeight, measures[i].Height);
-                    }
 
-                    if (_columnCount > 1 && _colWidths.Sum() > availableSize.Width)
-                    {
-                        _columnCount--;
-                        calculating = true;
-                        break;
-                    }
-                    _rowHeights.Add(rowHeight);
-                }
-            }
+            ResetSizes();
+            _colWidth = availableSize.Width;
+            for (int row = 0; row < measures.Length; row++)
+                _rowHeights.Add(measures[row].Height);
         }
 
         public Rect GetPosition(int index)
         {
-            var columnIndex = index%_columnCount;
-            var rowIndex = index/_columnCount;
-            var x = 0d;
-            for (int i = 0; i < columnIndex; i++)
-            {
-                x += _colWidths[i];
-            }
+            var rowIndex = index;
             var y = 0d;
             for (int i = 0; i < rowIndex; i++)
             {
                 y += _rowHeights[i];
             }
-            return new Rect(new Point(x, y), new Size(_colWidths[columnIndex], _rowHeights[rowIndex]));
+            return new Rect(new Point(0, y), new Size(_colWidth, _rowHeights[rowIndex]));
         }
 
         public int GetIndex(Point position)
         {
-            var col = 0;
-            var x = 0d;
-            while (x < position.X && _columnCount > col)
-            {
-                x += _colWidths[col];
-                col++;
-            }
-            col--;
             var row = 0;
             var y = 0d;
             while (y < position.Y && _rowHeights.Count > row)
@@ -94,35 +55,26 @@ namespace Lancer1WPF
             }
             row--;
             if (row < 0) row = 0;
-            if (col < 0) col = 0;
-            if (col >= _columnCount) col = _columnCount - 1;
-            var result = row*_columnCount + col;
+            var result = row;
             if (result > _elementCount) result = _elementCount - 1;
             return result;
         }
 
         private void AdjustEmptySpace(Size availableSize)
         {
-            var width = _colWidths.Sum();
-            if (!double.IsNaN(availableSize.Width) && availableSize.Width > width)
+            if (!double.IsNaN(availableSize.Width) && availableSize.Width > _colWidth)
             {
-                var dif = (availableSize.Width - width)/_columnCount;
+                var dif = (availableSize.Width - _colWidth);
 
-                for (var i = 0; i < _columnCount; i++)
-                {
-                    _colWidths[i] += dif;
-                }
+                _colWidth += dif;
             }
         }
 
         private void ResetSizes()
         {
             _rowHeights.Clear();
-            for (var j = 0; j < _colWidths.Length; j++)
-            {
-                _colWidths[j] = 0;
-            }
+            _colWidth = 0;
         }
-        
+
     }
 }

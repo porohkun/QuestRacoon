@@ -1,4 +1,4 @@
-﻿<UserControl xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"  xmlns:shb="clr-namespace:AurelienRibon.Ui.SyntaxHighlightBox"
+﻿<UserControl xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              x:Class="QuestRacoonWpf.DescriptionControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -28,29 +28,24 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Stretch" Orientation="Horizontal">
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Bold">{b}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Italic">{i}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Color">{color}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Writing speed (Chars per sec)">{s}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Wait (seconds)">{w}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Wait for input">{wi}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Wait for input and clear">{wc}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Clear">{c}</Button>
-                    <Button Margin="0,0,2,0" VerticalContentAlignment="Top" Focusable="False" Click="Button_Click" ToolTip="Exit without waiting for input">{x}</Button>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {b} " ToolTip="Bold"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {i} " ToolTip="Italic"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {color} " ToolTip="Color"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {s} " ToolTip="Writing speed (Chars per sec)"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {w} " ToolTip="Wait (seconds)"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wi} " ToolTip="Wait for input"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wc} " ToolTip="Wait for input and clear"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {c} " ToolTip="Clear"/>
+                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {x} " ToolTip="Exit without waiting for input"/>
                 </StackPanel>
-                <avalonedit:TextEditor x:Name="textBox" MaxHeight="22" Grid.Column="0" Grid.Row="2" 
-                         VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus">
+                <avalonedit:TextEditor x:Name="textBox" MaxHeight="22" Grid.Column="0" Grid.Row="2" WordWrap="True" TextChanged="textBox_TextChanged"
+                         VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" FontFamily="Calibri" FontSize="18.667">
                     <avalonedit:TextEditor.Options >
-                        <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="5" />
+                        <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="16"/>
                     </avalonedit:TextEditor.Options>
                 </avalonedit:TextEditor>
-                <!--TextWrapping="Wrap" AcceptsReturn="True"-->
-                <!--<shb:SyntaxHighlightBox x:Name="textBox" MaxHeight="22" Grid.Column="0" Grid.Row="2" 
-                         VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>-->
-                <!--<RichTextBox x:Name="textBox" MaxHeight="22" Grid.Column="0" Grid.Row="2" Width="Auto"
-                         VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus"/>-->
             </Grid>
-            <Button Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" Height="22">
+            <Button Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" Height="22" Click="CloseButton_Click">
                 <Image Source="..\..\Icons\cross.png" Width="16" Height="16"/>
             </Button>
         </Grid>
