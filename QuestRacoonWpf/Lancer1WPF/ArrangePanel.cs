@@ -16,6 +16,8 @@ namespace Lancer1WPF
         private Point _startPosition;
         private readonly ILayoutStrategy _strategy = new ListLayoutStrategy();
 
+        public event Action<UIElement, int, int> ChildReordered;
+
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             if (!(e.OriginalSource is Visual)) return;
@@ -66,10 +68,14 @@ namespace Lancer1WPF
             e.Handled = true;
             Point mousePosition = e.GetPosition(this);
             var index = _strategy.GetIndex(mousePosition);
+            int oldindex = GetOrder(_draggingObject);
             SetOrder(_draggingObject, index);
             var topLeft = mousePosition + _delta;
             var newPosition = new Rect(topLeft, GetPosition(_draggingObject).Size);
             SetPosition(_draggingObject, newPosition);
+
+            if (oldindex != index)
+                ChildReordered?.Invoke(_draggingObject, oldindex, index);
         }
 
         private void StopReordering()

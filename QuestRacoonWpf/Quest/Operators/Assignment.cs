@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QuestRacoonWpf.Quest
 {
-    public class Assignment : IOperator
+    public class Assignment : BaseOperator
     {
         private string _variable = "";
         private string _value = "";
@@ -22,9 +22,11 @@ namespace QuestRacoonWpf.Quest
             set { _value = value;Edited?.Invoke(); }
         }
 
-        public Action Edited { get; set; }
+        public override OperatorType Type { get { return OperatorType.Assignment; } }
 
-        public OperatorType Type { get { return OperatorType.Assignment; } }
+        public Assignment()
+        {
+        }
 
         public Assignment(string variable, string value)
         {
@@ -32,13 +34,18 @@ namespace QuestRacoonWpf.Quest
             _value = value;
         }
 
-        public void DeleteLocale(string locale) { }
+        public override void DeleteLocale(string locale) { }
 
-        public string GetText(string locale)
+        public override string GetText(string locale)
         {
             if (_variable == "" || _value == "")
                 return "WRONG ASSIGNMENT";
             return string.Format("{0} = {1};", _variable, _value);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Assignment:[{0}]", GetText("Default"));
         }
     }
 }

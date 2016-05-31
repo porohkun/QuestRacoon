@@ -20,6 +20,7 @@ namespace QuestRacoonWpf
     public partial class FlowBlock : UserControl
     {
         private Block _block;
+        private Quest.Quest _quest;
         private string _selectedLocale;
 
         private List<Arrow> _links = new List<Arrow>();
@@ -53,9 +54,10 @@ namespace QuestRacoonWpf
             InitializeComponent();
         }
 
-        public FlowBlock(Block block):this()
+        public FlowBlock(Block block, Quest.Quest quest):this()
         {
             _block = block;
+            _quest = quest;
             _block.NameChanged += _block_NameChanged;
             _block.OperatorsChanged += _block_OperatorsChanged;
             headerText.Content = _block.Name;
@@ -99,7 +101,7 @@ namespace QuestRacoonWpf
 
         public void EditBlock()
         {
-            var editWindow = new BlockEditWindow(_block, _selectedLocale);
+            var editWindow = new BlockEditWindow(_block, _quest, _selectedLocale);
             editWindow.ShowDialog();
         }
         

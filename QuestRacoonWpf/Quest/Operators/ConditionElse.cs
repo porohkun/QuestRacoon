@@ -5,19 +5,22 @@ using System.Text;
 
 namespace QuestRacoonWpf.Quest
 {
-    public class ConditionElse : IOperator
+    public class ConditionElse : BaseOperator
     {
         private static string _value = "ELSE";
 
-        public Action Edited { get; set; }
+        public override OperatorType Type { get { return OperatorType.ConditionElse; } }
 
-        public OperatorType Type { get { return OperatorType.ConditionElse; } }
+        public override void DeleteLocale(string locale) { }
 
-        public void DeleteLocale(string locale) { }
-
-        public string GetText(string locale)
+        public override string GetText(string locale)
         {
             return _value;
+        }
+
+        public override string ToString()
+        {
+            return GetText("Default");
         }
     }
 }

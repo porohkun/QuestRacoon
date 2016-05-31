@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QuestRacoonWpf.Quest
 {
-    public class Condition : IOperator
+    public class Condition : BaseOperator
     {
         public string _value = "";
 
@@ -15,22 +15,25 @@ namespace QuestRacoonWpf.Quest
             set { _value = value; Edited?.Invoke(); }
         }
 
-        public Action Edited { get; set; }
+        public override OperatorType Type { get { return OperatorType.Condition; } }
 
-        public OperatorType Type { get { return OperatorType.Condition; } }
-
-        public Condition(string value)
+        public Condition()
         {
-            _value = value;
+            
         }
 
-        public void DeleteLocale(string locale) { }
+        public override void DeleteLocale(string locale) { }
 
-        public string GetText(string locale)
+        public override string GetText(string locale)
         {
             if (_value == "")
                 return "WRONG CONDITION";
             return string.Format("IF ({0})", _value);
+        }
+
+        public override string ToString()
+        {
+            return GetText("Default");
         }
     }
 }

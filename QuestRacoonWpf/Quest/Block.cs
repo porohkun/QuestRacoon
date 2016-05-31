@@ -30,6 +30,7 @@ namespace QuestRacoonWpf.Quest
             {
                 _operators[index] = value;
                 value.Edited = OperatorEdited;
+                value.WantBeDeleted = OperatorWantBeDeleted;
                 Edited?.Invoke();
             }
         }
@@ -56,6 +57,12 @@ namespace QuestRacoonWpf.Quest
         private void OperatorEdited()
         {
             Edited?.Invoke();
+            OperatorsChanged?.Invoke();
+        }
+
+        private void OperatorWantBeDeleted(IOperator sender)
+        {
+            Remove(sender);
         }
 
         public string GetRawText(string locale)
@@ -136,6 +143,7 @@ namespace QuestRacoonWpf.Quest
         {
             _operators.Insert(index, item);
             item.Edited = OperatorEdited;
+            item.WantBeDeleted = OperatorWantBeDeleted;
             OperatorsChanged?.Invoke();
             Edited?.Invoke();
         }
@@ -147,10 +155,21 @@ namespace QuestRacoonWpf.Quest
             Edited?.Invoke();
         }
 
+        public void MoveByIndex(int oldi, int newi)
+        {
+            if (oldi == newi) return;
+            var op = _operators[oldi];
+            _operators.Insert(oldi < newi ? newi + 1 : newi, op);
+            _operators.RemoveAt(newi < oldi ? oldi + 1 : oldi);
+            OperatorsChanged?.Invoke();
+            Edited?.Invoke();
+        }
+
         public void Add(IOperator item)
         {
             _operators.Add(item);
             item.Edited = OperatorEdited;
+            item.WantBeDeleted = OperatorWantBeDeleted;
             OperatorsChanged?.Invoke();
             Edited?.Invoke();
         }

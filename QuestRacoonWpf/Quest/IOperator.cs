@@ -8,9 +8,11 @@ namespace QuestRacoonWpf
     public interface IOperator
     {
         Quest.OperatorType Type { get; }
+        Action<IOperator> WantBeDeleted { get; set; }
         Action Edited { get; set; }
 
         string GetText(string locale);
         void DeleteLocale(string locale);
+        void Delete();
     }
 }

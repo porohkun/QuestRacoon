@@ -194,7 +194,8 @@ namespace QuestRacoonWpf
 
         private void menuItem_LocalesClick(object sender, RoutedEventArgs e)
         {
-
+            var localesWindow = new LocalesWindow(_quest);
+            localesWindow.ShowDialog();
         }
 
         private void menuItem_AboutClick(object sender, RoutedEventArgs e)
@@ -328,7 +329,7 @@ namespace QuestRacoonWpf
 
         private void PlaceBlock(Quest.Block qBlock)
         {
-            var block = new FlowBlock(qBlock);
+            var block = new FlowBlock(qBlock, _quest);
             block.SelectedLocale = _quest.MainLocale;
             dragCanvas.AddBlock(block);
         }

@@ -5,22 +5,24 @@ using System.Text;
 
 namespace QuestRacoonWpf.Quest
 {
-    public class Speech : IOperator
+    public class Speech : BaseOperator
     {
         private string _character = "";
 
-        public string Character { get { return _character; } set { _character = value; Edited?.Invoke(); } }
+        public string Character { get { return _character; } set { if (_character != value) { _character = value; Edited?.Invoke(); } } }
         public LocalizedText Text { get; private set; }
+        
+        public override OperatorType Type { get { return OperatorType.Speech; } }
 
-        public Action Edited { get; set; }
-
-        public OperatorType Type { get { return OperatorType.Speech; } }
-
-        public Speech(string character)
+        public Speech()
         {
-            _character = character;
             Text = new LocalizedText();
             Text.Edited += TextEdited;
+        }
+
+        public Speech(string character) : this()
+        {
+            _character = character;
         }
 
         public void TextEdited()
@@ -28,16 +30,21 @@ namespace QuestRacoonWpf.Quest
             Edited?.Invoke();
         }
 
-        public void DeleteLocale(string locale)
+        public override void DeleteLocale(string locale)
         {
             Text.DeleteLocale(locale);
         }
 
-        public string GetText(string locale)
+        public override string GetText(string locale)
         {
             if (_character == "")
                 return "WRONG CHARACTER";
             return string.Format("{0}: \"{1}\"", Character, Text.GetText(locale));
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Speech:[{0}]", GetText("Default"));
         }
     }
 }

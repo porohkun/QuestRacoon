@@ -5,13 +5,11 @@ using System.Text;
 
 namespace QuestRacoonWpf.Quest
 {
-    public class Description : IOperator
+    public class Description : BaseOperator
     {
         public LocalizedText Text { get; private set; }
 
-        public Action Edited { get; set; }
-
-        public OperatorType Type { get { return OperatorType.Description; } }
+        public override OperatorType Type { get { return OperatorType.Description; } }
 
         public Description()
         {
@@ -24,19 +22,19 @@ namespace QuestRacoonWpf.Quest
             Edited?.Invoke();
         }
 
-        public void DeleteLocale(string locale)
+        public override void DeleteLocale(string locale)
         {
             Text.DeleteLocale(locale);
         }
 
-        public string GetText(string locale)
+        public override string GetText(string locale)
         {
             return Text.GetText(locale);
         }
-
-        internal void Delete()
+        
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return string.Format("Description:[{0}]", GetText("Default"));
         }
     }
 }

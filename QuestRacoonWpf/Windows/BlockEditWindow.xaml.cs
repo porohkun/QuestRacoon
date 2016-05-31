@@ -20,6 +20,7 @@ namespace QuestRacoonWpf
     public partial class BlockEditWindow : Window
     {
         private Quest.Block _block;
+        private Quest.Quest _quest;
         private Dictionary<string, string> _texts = new Dictionary<string, string>();
         private string _locale;
         //private List<ToolStripButton> _localeButtons = new List<ToolStripButton>();
@@ -37,41 +38,56 @@ namespace QuestRacoonWpf
             }
         }
 
-        public BlockEditWindow(Quest.Block block, string locale) : this()
+        public BlockEditWindow(Quest.Block block, Quest.Quest quest, string locale) : this()
         {
             _block = block;
+            _quest = quest;
             Title = _block.Name;
             headerBox.Text = _block.Name;
 
             var firstOp = operators.Children[0];
 
             foreach (var op in _block)
-            {
-                UIElement opc = null;
-                switch (op.Type)
-                {
-                    case Quest.OperatorType.Assignment: break;
-                    case Quest.OperatorType.Condition: break;
-                    case Quest.OperatorType.ConditionElse: break;
-                    case Quest.OperatorType.ConditionEnd: break;
-                    case Quest.OperatorType.Description: opc = new DescriptionControl(op as Quest.Description); break;
-                    case Quest.OperatorType.Link: break;
-                    case Quest.OperatorType.Speech: break;
-                }
-                if (opc != null)
-                {
-                    operators.Children.Add(opc);
-                }
-            }
+                CreateOperatorControl(op);
 
             operators.Children.Remove(firstOp);
+
+            foreach (var loc in _quest.Locales)
+                localesBox.Items.Add(loc);
+
             SwitchLocale(locale);
+        }
+
+        private void CreateOperatorControl(IOperator op)
+        {
+            BaseOperatorControl opc = null;
+            switch (op.Type)
+            {
+                case Quest.OperatorType.Assignment: break;
+                case Quest.OperatorType.Condition: break;
+                case Quest.OperatorType.ConditionElse: break;
+                case Quest.OperatorType.ConditionEnd: break;
+                case Quest.OperatorType.Description: opc = new DescriptionControl(op as Quest.Description); break;
+                case Quest.OperatorType.Link: opc = new LinkControl(op as Quest.Link, _quest); break;
+                case Quest.OperatorType.Speech: opc = new SpeechControl(op as Quest.Speech); break;
+            }
+            if (opc != null)
+            {
+                operators.Children.Add(opc as UIElement);
+                opc.WantBeDeleted += Opc_WantBeDeleted;
+            }
+        }
+
+        private void Opc_WantBeDeleted(BaseOperatorControl obj)
+        {
+            operators.Children.Remove(obj as UIElement);
         }
 
         private void SwitchLocale(string locale)
         {
             _locale = locale;
-            foreach (IOperatorControl op in operators.Children)
+            localesBox.SelectedItem = locale;
+            foreach (BaseOperatorControl op in operators.Children)
                 op.Locale = locale;
         }
 
@@ -85,7 +101,34 @@ namespace QuestRacoonWpf
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            operators.Children.Add(new Label() { Content = "gggggggg" });
+            string type = ((Button)sender).Content as string;
+            IOperator op = null;
+            switch (type)
+            {
+                case "Assignment": op = new Quest.Assignment(); break;
+                case "Condition": op = new Quest.Condition(); break;
+                case "ConditionElse": op = new Quest.ConditionElse(); break;
+                case "ConditionEnd": op = new Quest.ConditionEnd(); break;
+                case "Description": op = new Quest.Description(); break;
+                case "Link": op = new Quest.Link(); break;
+                case "Speech": op = new Quest.Speech(); break;
+            }
+            if (op != null)
+            {
+                _block.Add(op);
+                CreateOperatorControl(op);
+            }
+        }
+
+        private void operators_ChildReordered(UIElement control, int oldIndex, int newIndex)
+        {
+            var opc = control as BaseOperatorControl;
+            _block.MoveByIndex(oldIndex, newIndex);
+        }
+
+        private void localesBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SwitchLocale((string)localesBox.SelectedItem);
         }
     }
 }

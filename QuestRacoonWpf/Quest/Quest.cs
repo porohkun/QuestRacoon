@@ -23,13 +23,37 @@ namespace QuestRacoonWpf.Quest
         public Quest()
         {
             Edited = false;
-            _locales.Add("Standart");
-            MainLocale = "Standart";
+            _locales.Add("Default");
+            MainLocale = "Default";
         }
 
-        public Quest(JSONValue json)
+        public Quest(JSONValue json) : this()
         {
             Edited = false;
+            if (json.Obj.ContainsKey("version"))
+                ParseOld(json);
+            else
+                ParseNew(json);
+        }
+
+        private void ParseOld(JSONValue json)
+        {
+            _locales.AddRange(json["locales"].DynamicCast<string>());
+            foreach (var jBlock in json["blocks"])
+            {
+                var block = new Block(jBlock);
+                block.Edited += blockEdited;
+                _blocks.Add(block);
+            }
+            if (_locales.Contains("Standart"))
+                _locales.Remove("Standart");
+            MainLocale = json["main_locale"];
+            if (MainLocale == "Standart")
+                SetMainLocale("Default");
+        }
+
+        private void ParseNew(JSONValue json)
+        {
             _locales.AddRange(json["locales"].DynamicCast<string>());
             MainLocale = json["main_locale"];
             foreach (var jBlock in json["blocks"])

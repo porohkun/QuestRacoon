@@ -8,23 +8,33 @@
         WindowStartupLocation="Manual"
         Title="BlockEditWindow" Height="460.344" Width="446.552" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Grid>
-        <TextBox x:Name="headerBox" Height="23" Margin="10,10,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-        <Border Margin="10,38,115,10" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="1" Grid.Column="1" Text="Block Name: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        <TextBox x:Name="headerBox" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Style="{StaticResource TextboxStyle2}" VerticalAlignment="Top"/>
+        <ComboBox x:Name="localesBox" Grid.Row="1" Grid.Column="4" SelectionChanged="localesBox_SelectionChanged"/>
+        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
             <ScrollViewer>
-                <lancer:ArrangePanel x:Name="operators" VerticalAlignment="Top">
+                <lancer:ArrangePanel x:Name="operators" ChildReordered="operators_ChildReordered" VerticalAlignment="Top">
                     <Label/>
                 </lancer:ArrangePanel>
             </ScrollViewer>
         </Border>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="200"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <StackPanel HorizontalAlignment="Right" Width="100" Margin="0,38,10,10">
-            <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Description"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" >
+            <Button Margin="0,0,0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Description"/>
             <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Speech"/>
             <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Link"/>
             <Button Margin="0,2" Style="{StaticResource LargeButton}" Click="Button_Click" Content="Assignment"/>

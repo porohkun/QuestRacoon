@@ -23,16 +23,13 @@ namespace QuestRacoonWpf
     /// <summary>
     /// Interaction logic for DescriptionControl.xaml
     /// </summary>
-    public partial class DescriptionControl : UserControl, IOperatorControl
+    public partial class DescriptionControl : BaseOperatorControl
     {
-        private string _locale = "Default";
-        public string Locale { get { return _locale; } set { _locale = value; UpdateText(); } }
-        
         double _row0H = 0;
         double _row1H = 0;
 
         private Description _description;
-
+        
         public DescriptionControl()
         {
             if (HighlightingManager.Instance.HighlightingDefinitions.Count(d => d.Name == "Custom Highlighting") == 0)
@@ -66,29 +63,30 @@ namespace QuestRacoonWpf
             _description = description;
         }
 
-        private void UpdateText()
+        protected override void UpdateText()
         {
-            textBox.Text = _description.Text.GetText(_locale);
+            textBox.Text = _description.Text.GetText(Locale);
         }
 
         private void textBox_LostFocus(object sender, RoutedEventArgs e)
         {
             row0.Height = new GridLength(0);
             row1.Height = new GridLength(0);
-            textBox.MaxHeight = 22;
+            textBox.MaxHeight = 25;
+            _description.Text.SetText(textBox.Text, Locale);
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e)
         {
             row0.Height = new GridLength(_row0H);
             row1.Height = new GridLength(_row1H);
-            textBox.MaxHeight = 88;
-            textBox.Height = 88;
+            textBox.MaxHeight = 92;
+            textBox.Height = 92;
         }
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var action = (string)((Button)sender).Content;
+            var action = ((string)((Button)sender).Content).Trim();
 
             switch (action)
             {
@@ -130,11 +128,7 @@ namespace QuestRacoonWpf
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             _description.Delete();
-        }
-
-        private void textBox_TextChanged(object sender, EventArgs e)
-        {
-            _description.Text.SetText(textBox.Text, _locale);
+            OnVantBeDeleted(this);
         }
     }
 }
