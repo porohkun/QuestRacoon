@@ -64,9 +64,9 @@ namespace QuestRacoonWpf
             switch (op.Type)
             {
                 case Quest.OperatorType.Assignment: break;
-                case Quest.OperatorType.Condition: break;
-                case Quest.OperatorType.ConditionElse: break;
-                case Quest.OperatorType.ConditionEnd: break;
+                case Quest.OperatorType.Condition: opc = new ConditionControl(op as Quest.Condition); break;
+                case Quest.OperatorType.ConditionElse: opc = new ConditionElseControl(op as Quest.ConditionElse); break;
+                case Quest.OperatorType.ConditionEnd: opc = new ConditionEndControl(op as Quest.ConditionEnd); break;
                 case Quest.OperatorType.Description: opc = new DescriptionControl(op as Quest.Description); break;
                 case Quest.OperatorType.Link: opc = new LinkControl(op as Quest.Link, _quest); break;
                 case Quest.OperatorType.Speech: opc = new SpeechControl(op as Quest.Speech); break;
@@ -107,8 +107,8 @@ namespace QuestRacoonWpf
             {
                 case "Assignment": op = new Quest.Assignment(); break;
                 case "Condition": op = new Quest.Condition(); break;
-                case "ConditionElse": op = new Quest.ConditionElse(); break;
-                case "ConditionEnd": op = new Quest.ConditionEnd(); break;
+                case "Else": op = new Quest.ConditionElse(); break;
+                case "End": op = new Quest.ConditionEnd(); break;
                 case "Description": op = new Quest.Description(); break;
                 case "Link": op = new Quest.Link(); break;
                 case "Speech": op = new Quest.Speech(); break;

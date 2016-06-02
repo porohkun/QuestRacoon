@@ -1,5 +1,5 @@
-﻿<local:BaseOperatorControl xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
-                           x:Class="QuestRacoonWpf.LinkControl"
+﻿<local:BaseOperatorControl  x:Class="QuestRacoonWpf.LinkControl"
+                            xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
