@@ -17,31 +17,28 @@ namespace QuestRacoonWpf
         public static readonly DependencyProperty ArrowAngleProperty = DependencyProperty.Register("ArrowAngle", typeof(double), typeof(Arrow), new FrameworkPropertyMetadata(45.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static readonly DependencyProperty ArrowLengthProperty = DependencyProperty.Register("ArrowLength", typeof(double), typeof(Arrow), new FrameworkPropertyMetadata(12.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
         public static readonly DependencyProperty ArrowEndsProperty = DependencyProperty.Register("ArrowEnds", typeof(ArrowEnds), typeof(Arrow), new FrameworkPropertyMetadata(ArrowEnds.End, FrameworkPropertyMetadataOptions.AffectsMeasure));
-        
+
         public double ArrowAngle
         {
             set { SetValue(ArrowAngleProperty, value); }
             get { return (double)GetValue(ArrowAngleProperty); }
         }
-        
+
         public double ArrowLength
         {
             set { SetValue(ArrowLengthProperty, value); }
             get { return (double)GetValue(ArrowLengthProperty); }
         }
-        
+
         public ArrowEnds ArrowEnds
         {
             set { SetValue(ArrowEndsProperty, value); }
             get { return (ArrowEnds)GetValue(ArrowEndsProperty); }
         }
-
-
-        //public Point StartPoint { get { return new Point(Canvas.GetLeft(Start), Canvas.GetTop(Start)); } }
-        //public Point EndPoint { get { return new Point(Canvas.GetLeft(End), Canvas.GetTop(End)); } }
-        public Control Start;
-        public Control End;
         
+        public FlowBlock Start;
+        public FlowBlock End;
+
         public Arrow()
         {
             Stroke = Brushes.Black;
@@ -52,9 +49,26 @@ namespace QuestRacoonWpf
         {
             Start = start;
             start.Moving += flowBlock_Moved;
+            start.WantBeDeleted += block_WantBeDeleted;
             End = end;
             end.Moving += flowBlock_Moved;
+            end.WantBeDeleted += block_WantBeDeleted;
             InvalidateMeasure();
+        }
+
+        private void block_WantBeDeleted()
+        {
+            Delete();
+        }
+
+        public void Delete()
+        {
+            Start.Moving -= flowBlock_Moved;
+            Start.WantBeDeleted -= block_WantBeDeleted;
+            End.Moving -= flowBlock_Moved;
+            End.WantBeDeleted -= block_WantBeDeleted;
+            var workspace = this.Parent as DragCanvas;
+            workspace.Children.Remove(this);
         }
 
         private void flowBlock_Moved(FlowBlock sender)
@@ -99,12 +113,12 @@ namespace QuestRacoonWpf
             Vector vect = pt1 - pt2;
             vect.Normalize();
             vect *= ArrowLength;
-            
+
             matx.Rotate(ArrowAngle / 2);
             ctx.BeginFigure(pt2 + vect * matx, false, false);
             matx.Rotate(-ArrowAngle);
             ctx.PolyLineTo(new[] { pt2, pt2 + vect * matx }, true, false);
         }
-        
+
     }
 }

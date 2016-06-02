@@ -277,6 +277,7 @@ namespace QuestRacoonWpf
                 try
                 {
                     var filename = saveQuestDialog.FileName;
+                    _quest.DropEdited();
                     QuestPath = System.IO.Path.ChangeExtension(filename, "qrc");
                     _quest.ToJson().Save(QuestPath, false);
                     UpdateRecent(QuestPath);
@@ -333,7 +334,7 @@ namespace QuestRacoonWpf
             block.SelectedLocale = _quest.MainLocale;
             dragCanvas.AddBlock(block);
         }
-
+        
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (!CheckSaved(_quest))

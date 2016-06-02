@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PNetJson;
 
 namespace QuestRacoonWpf
 {
@@ -10,6 +11,8 @@ namespace QuestRacoonWpf
         Quest.OperatorType Type { get; }
         Action<IOperator> WantBeDeleted { get; set; }
         Action Edited { get; set; }
+        
+        JSONValue ToJson();
 
         string GetText(string locale);
         void DeleteLocale(string locale);

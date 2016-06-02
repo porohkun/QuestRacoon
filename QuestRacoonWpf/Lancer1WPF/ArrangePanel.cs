@@ -74,7 +74,7 @@ namespace Lancer1WPF
             var newPosition = new Rect(topLeft, GetPosition(_draggingObject).Size);
             SetPosition(_draggingObject, newPosition);
 
-            if (oldindex != index)
+            if (oldindex != index && oldindex < Children.Count)
                 ChildReordered?.Invoke(_draggingObject, oldindex, index);
         }
 

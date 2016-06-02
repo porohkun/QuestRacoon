@@ -20,7 +20,9 @@ namespace QuestRacoonWpf.Quest
         public event Action NameChanged;
         public event Action OperatorsChanged;
         public event Action Edited;
+        public event Action Deleted;
 
+        private Quest _quest;
         private List<IOperator> _operators;
 
         public IOperator this[int index]
@@ -34,24 +36,30 @@ namespace QuestRacoonWpf.Quest
                 Edited?.Invoke();
             }
         }
-        
-        public Block(Point location, string name)
+
+        public Block(Quest quest, Point location, string name) : this(quest, location, name, false) { }
+
+        private Block(Quest quest, Point location, string name, bool intern)
         {
+            _quest = quest;
             Location = location;
             Name = name;
             _operators = new List<IOperator>();
-            Add(new Description());
-            //foreach (var loc in locales)
-            //    _rawTexts.Add(loc, "");
+            if (!intern)
+                Add(new Description());
         }
 
-        public Block(JSONValue json)
+        public Block(Quest quest, JSONValue json) : this(quest, new Point(json["location"]["x"], json["location"]["y"]), json["name"], true)
         {
-            throw new NotImplementedException();
-            //Name = json["name"];
-            //Location = new Point(json["location"]["x"], json["location"]["y"]);
-            //foreach (var text in json["text"].Obj)
-            //    _rawTexts.Add(text.Key, text.Value);
+            if (json.Obj.ContainsKey("text"))
+            {
+                _operators.Add(Description.ParseOld(json["text"]));
+            }
+            else
+            {
+                foreach (var op in json["operators"])
+                    _operators.Add(BaseOperator.Parse(op));
+            }
         }
 
         private void OperatorEdited()
@@ -106,28 +114,18 @@ namespace QuestRacoonWpf.Quest
 
         internal void DeleteBlock()
         {
-            throw new NotImplementedException();
+            _quest.DeleteBlock(this);
+            Deleted?.Invoke();
         }
-
-        //public IEnumerable<Match> GetRawLinks(string locale)
-        //{
-        //    Regex reg = new Regex(@"\[\[[\w ]+\|[\w ]+\]\]");
-        //    var matches = reg.Matches(_rawTexts[locale]);
-        //    foreach (Match match in matches)
-        //    {
-        //        yield return match;
-        //    }
-        //}
-
+        
         public JSONValue ToJson()
         {
-            throw new NotImplementedException();
-            //return new JSONObject(
-            //    new JOPair("name", Name),
-            //    new JOPair("location", new JSONObject(
-            //        new JOPair("x", Location.X),
-            //        new JOPair("y", Location.Y))),
-            //    new JOPair("text", new JSONObject(from t in _rawTexts select new JOPair(t.Key, t.Value))));
+            return new JSONObject(
+                new JOPair("name", Name),
+                new JOPair("location", new JSONObject(
+                    new JOPair("x", Location.X),
+                    new JOPair("y", Location.Y))),
+                new JOPair("operators", new JSONArray(_operators.Select(o => o.ToJson()))));
         }
 
         public IEnumerator<IOperator> GetEnumerator()

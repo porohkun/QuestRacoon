@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PNetJson;
 
 namespace QuestRacoonWpf.Quest
 {
@@ -26,6 +27,18 @@ namespace QuestRacoonWpf.Quest
                 return true;
             }
             return false;
+        }
+
+        internal void Parse(JSONValue json)
+        {
+            _texts.Clear();
+            foreach (var text in json.Obj)
+                _texts.Add(text.Key, text.Value);
+        }
+
+        internal JSONValue ToJson()
+        {
+            return new JSONObject(from t in _texts select new JOPair(t.Key, t.Value));
         }
 
         internal void RenameLocale(string oldLocale, string locale)

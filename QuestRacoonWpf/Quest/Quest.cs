@@ -38,27 +38,29 @@ namespace QuestRacoonWpf.Quest
 
         private void ParseOld(JSONValue json)
         {
+            _locales.Clear();
             _locales.AddRange(json["locales"].DynamicCast<string>());
             foreach (var jBlock in json["blocks"])
             {
-                var block = new Block(jBlock);
+                var block = new Block(this, jBlock);
                 block.Edited += blockEdited;
                 _blocks.Add(block);
             }
-            if (_locales.Contains("Standart"))
-                _locales.Remove("Standart");
             MainLocale = json["main_locale"];
+            if (_locales.Contains("Standart"))
+                RenameLocale("Standart", "Default");
             if (MainLocale == "Standart")
                 SetMainLocale("Default");
         }
 
         private void ParseNew(JSONValue json)
         {
+            _locales.Clear();
             _locales.AddRange(json["locales"].DynamicCast<string>());
             MainLocale = json["main_locale"];
             foreach (var jBlock in json["blocks"])
             {
-                var block = new Block(jBlock);
+                var block = new Block(this, jBlock);
                 block.Edited += blockEdited;
                 _blocks.Add(block);
             }
@@ -78,12 +80,18 @@ namespace QuestRacoonWpf.Quest
 
         public Block CreateBlock(Point location, string name)
         {
-            var block = new Block(location, name);
+            var block = new Block(this, location, name);
             block.Edited += blockEdited;
             _blocks.Add(block);
             BlockAdded?.Invoke(block);
             Edited = true;
             return block;
+        }
+
+        internal void DeleteBlock(Block block)
+        {
+            _blocks.Remove(block);
+            Edited = true;
         }
 
         public Block GetBlock(string name)
@@ -142,6 +150,7 @@ namespace QuestRacoonWpf.Quest
         public JSONValue ToJson()
         {
             JSONValue json = new JSONObject(
+                new JOPair("version", QR.CurrentVersion),
                 new JOPair("locales", new JSONArray(Locales.DynamicCast<JSONValue>())),
                 new JOPair("main_locale", MainLocale),
                 new JOPair("blocks", new JSONArray(_blocks.Select(b => b.ToJson()))));

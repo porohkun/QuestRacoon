@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PNetJson;
 
 namespace QuestRacoonWpf.Quest
 {
@@ -28,10 +29,10 @@ namespace QuestRacoonWpf.Quest
         {
         }
 
-        public Assignment(string variable, string value)
+        public Assignment(JSONValue json):this()
         {
-            _variable = variable;
-            _value = value;
+            _variable = json["variable"];
+            _value = json["value"];
         }
 
         public override void DeleteLocale(string locale) { }
@@ -48,6 +49,14 @@ namespace QuestRacoonWpf.Quest
         public override string ToString()
         {
             return string.Format("Assignment:[{0}]", GetText("Default"));
+        }
+
+        public override JSONValue ToJson()
+        {
+            var json = base.ToJson();
+            json.Obj.Add("variable", Variable);
+            json.Obj.Add("value", Value);
+            return json;
         }
     }
 }

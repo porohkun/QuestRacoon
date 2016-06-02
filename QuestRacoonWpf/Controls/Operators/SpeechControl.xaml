@@ -11,38 +11,41 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0" x:Name="col0"/>
+                <ColumnDefinition Width="*" x:Name="col1"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="130"/>
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="25"/>
                 <ColumnDefinition Width="10"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-            <Grid Grid.Column="1" Grid.Row="1" Name="rtbContainer">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25" x:Name="row0"/>
-                    <RowDefinition Height="5" x:Name="row1"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="Character Name: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
-                    <TextBox x:Name="characterBox" Grid.Column="1" FontFamily="Calibri" FontSize="18.667" LostFocus="characterBox_LostFocus"/>
-                </Grid>
-                <avalonedit:TextEditor x:Name="textBox" MaxHeight="25" Grid.Column="0" Grid.Row="2" WordWrap="True"
-                         VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" FontFamily="Calibri" FontSize="18.667">
-                    <avalonedit:TextEditor.Options >
-                        <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="16"/>
-                    </avalonedit:TextEditor.Options>
-                </avalonedit:TextEditor>
-            </Grid>
-            <Button Grid.Column="3" Grid.Row="1" VerticalAlignment="Top" Height="25" Click="CloseButton_Click">
+            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {b} " ToolTip="Bold"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {i} " ToolTip="Italic"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {color} " ToolTip="Color"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {s} " ToolTip="Writing speed (Chars per sec)"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {w} " ToolTip="Wait (seconds)"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wi} " ToolTip="Wait for input"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wc} " ToolTip="Wait for input and clear"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {c} " ToolTip="Clear"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {x} " ToolTip="Exit without waiting for input"/>
+            </StackPanel>
+            <TextBlock Grid.Column="3" Grid.Row="1" Text="Character Name: " VerticalAlignment="Center" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="4" Grid.Row="1" x:Name="characterBox"  FontFamily="Calibri" FontSize="18.667" LostFocus="characterBox_LostFocus"/>
+            <avalonedit:TextEditor x:Name="textBox" MaxHeight="25" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" WordWrap="True"
+                                   VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" FontFamily="Calibri" FontSize="18.667">
+                <avalonedit:TextEditor.Options >
+                    <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="16"/>
+                </avalonedit:TextEditor.Options>
+            </avalonedit:TextEditor>
+            <Button Grid.Column="6" Grid.Row="1" VerticalAlignment="Stretch"  Click="CloseButton_Click">
                 <Image Source="..\..\Icons\cross.png" Width="16" Height="16"/>
             </Button>
         </Grid>

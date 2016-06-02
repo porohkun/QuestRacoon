@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PNetJson;
 
 namespace QuestRacoonWpf.Quest
 {
@@ -19,10 +20,11 @@ namespace QuestRacoonWpf.Quest
             Text = new LocalizedText();
             Text.Edited += TextEdited;
         }
-
-        public Speech(string character) : this()
+        
+        public Speech(JSONValue json):this()
         {
-            _character = character;
+            _character = json["character"];
+            Text.Parse(json["text"]);
         }
 
         public void TextEdited()
@@ -50,6 +52,14 @@ namespace QuestRacoonWpf.Quest
         public override string ToString()
         {
             return string.Format("Speech:[{0}]", GetText("Default"));
+        }
+
+        public override JSONValue ToJson()
+        {
+            var json = base.ToJson();
+            json.Obj.Add("character", _character);
+            json.Obj.Add("text", Text.ToJson());
+            return json;
         }
     }
 }

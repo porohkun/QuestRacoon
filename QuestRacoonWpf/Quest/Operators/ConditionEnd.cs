@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using PNetJson;
 
 namespace QuestRacoonWpf.Quest
 {
@@ -10,6 +11,14 @@ namespace QuestRacoonWpf.Quest
         private static string _value = "END";
 
         public override OperatorType Type { get { return OperatorType.ConditionEnd; } }
+
+        public ConditionEnd()
+        {
+        }
+
+        public ConditionEnd(JSONValue json):this()
+        {
+        }
 
         public override void DeleteLocale(string locale) { }
 

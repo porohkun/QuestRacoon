@@ -112,7 +112,7 @@ namespace QuestRacoonWpf
             SetTop(block, block.Top);
             SetLeft(block, block.Left);
         }
-
+        
         public FlowBlock GetBlock(string link)
         {
             foreach (var child in Children)
@@ -365,7 +365,7 @@ namespace QuestRacoonWpf
                 block.SetPosition(newHorizontalOffset, newVerticalOffset);
             }
         }
-
+        
         #endregion // OnPreviewMouseMove
 
         #region OnHostPreviewMouseUp

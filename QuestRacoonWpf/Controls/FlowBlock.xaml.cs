@@ -42,6 +42,7 @@ namespace QuestRacoonWpf
         public string Header { get { return _block.Name; } }
 
         public event Action<FlowBlock> Moving;
+        public event Action WantBeDeleted;
 
         internal void Move()
         {
@@ -60,12 +61,20 @@ namespace QuestRacoonWpf
             _quest = quest;
             _block.NameChanged += _block_NameChanged;
             _block.OperatorsChanged += _block_OperatorsChanged;
+            _block.Deleted += _block_Deleted;
             headerText.Content = _block.Name;
         }
 
         public void SetPosition(double left,double top)
         {
             _block.SetLocation(new Quest.Point(left, top));
+        }
+
+        private void _block_Deleted()
+        {
+            var workspace = Parent as DragCanvas;
+            WantBeDeleted?.Invoke();
+            workspace.Children.Remove(this);
         }
 
         private void _block_OperatorsChanged()
@@ -109,6 +118,7 @@ namespace QuestRacoonWpf
         {
             var links = new List<string>(from op in _block where op is Link select (op as Link).To);
             var forDel = new List<Arrow>();
+            _brokenLinks.Clear();
             var workspace = Parent as DragCanvas;
             if (workspace == null) return;
 
@@ -141,7 +151,7 @@ namespace QuestRacoonWpf
             foreach (var link in forDel)
             {
                 _links.Remove(link);
-                workspace.Children.Remove(link);
+                link.Delete();
             }
         }
 

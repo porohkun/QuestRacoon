@@ -54,11 +54,11 @@ namespace QuestRacoonWpf
 
         private void DelLocaleButton_Click(object sender, RoutedEventArgs e)
         {
-            var locale = localesList.SelectedItem;
-            if (locale != null)
+            var locale = (string)localesList.SelectedItem;
+            if (locale != null && locale != "Default")
             {
                 localesList.Items.Remove(locale);
-                _quest.DeleteLocale((string)locale);
+                _quest.DeleteLocale(locale);
             }
             ShowLocalesList();
         }
@@ -66,7 +66,7 @@ namespace QuestRacoonWpf
         private void RenameLocaleButton_Click(object sender, RoutedEventArgs e)
         {
             string locale = (string)localesList.SelectedItem;
-            if (locale != null)
+            if (locale != null && locale != "Default")
             {
                 var addLocWin = new AddLocaleWindow(locale);
                 if (addLocWin.ShowDialog().Value)
