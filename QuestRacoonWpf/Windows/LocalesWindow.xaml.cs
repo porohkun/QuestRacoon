@@ -29,25 +29,54 @@ namespace QuestRacoonWpf
         public LocalesWindow(Quest.Quest _quest) : this()
         {
             this._quest = _quest;
+            ShowLocalesList();
+        }
+
+        private void ShowLocalesList()
+        {
+            localesList.Items.Clear();
             foreach (var loc in _quest.Locales.OrderBy(l => l))
                 localesList.Items.Add(loc);
         }
 
         private void AddLocaleButton_Click(object sender, RoutedEventArgs e)
         {
-
+            var addLocWin = new AddLocaleWindow();
+            if (addLocWin.ShowDialog().Value)
+            {
+                string loc = addLocWin.Locale;
+                if (!_quest.Locales.Contains(loc))
+                    _quest.AddLocale(loc);
+                ShowLocalesList();
+            }
         }
+        
 
         private void DelLocaleButton_Click(object sender, RoutedEventArgs e)
         {
             var locale = localesList.SelectedItem;
-            localesList.Items.Remove(locale);
-            _quest.DeleteLocale((string)locale);
+            if (locale != null)
+            {
+                localesList.Items.Remove(locale);
+                _quest.DeleteLocale((string)locale);
+            }
+            ShowLocalesList();
         }
 
         private void RenameLocaleButton_Click(object sender, RoutedEventArgs e)
         {
-
+            string locale = (string)localesList.SelectedItem;
+            if (locale != null)
+            {
+                var addLocWin = new AddLocaleWindow(locale);
+                if (addLocWin.ShowDialog().Value)
+                {
+                    string loc = addLocWin.Locale;
+                    if (_quest.Locales.Contains(locale) && !_quest.Locales.Contains(loc))
+                        _quest.RenameLocale(locale, loc);
+                }
+            }
+            ShowLocalesList();
         }
 
     }

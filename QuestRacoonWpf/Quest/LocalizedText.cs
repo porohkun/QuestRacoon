@@ -28,6 +28,16 @@ namespace QuestRacoonWpf.Quest
             return false;
         }
 
+        internal void RenameLocale(string oldLocale, string locale)
+        {
+            if (_texts.ContainsKey(oldLocale) && !_texts.ContainsKey(locale))
+            {
+                _texts.Add(locale, _texts[oldLocale]);
+                _texts.Remove(oldLocale);
+                Edited?.Invoke();
+            }
+        }
+
         internal string GetText(string locale)
         {
             if (_texts.ContainsKey(locale))

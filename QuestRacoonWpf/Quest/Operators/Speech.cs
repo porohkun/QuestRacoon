@@ -35,6 +35,11 @@ namespace QuestRacoonWpf.Quest
             Text.DeleteLocale(locale);
         }
 
+        public override void RenameLocale(string oldLocale, string locale)
+        {
+            Text.RenameLocale(oldLocale, locale);
+        }
+
         public override string GetText(string locale)
         {
             if (_character == "")

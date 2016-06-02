@@ -97,7 +97,13 @@ namespace QuestRacoonWpf.Quest
             foreach (var op in _operators)
                 op.DeleteLocale(locale);
         }
-        
+
+        public void RenameLocale(string oldLocale, string locale)
+        {
+            foreach (var op in _operators)
+                op.RenameLocale(oldLocale, locale);
+        }
+
         internal void DeleteBlock()
         {
             throw new NotImplementedException();

@@ -16,6 +16,7 @@ namespace QuestRacoonWpf.Quest
             WantBeDeleted?.Invoke(this);
         }
         public abstract void DeleteLocale(string locale);
+        public abstract void RenameLocale(string oldLocale, string locale);
         public abstract string GetText(string locale);
     }
 }

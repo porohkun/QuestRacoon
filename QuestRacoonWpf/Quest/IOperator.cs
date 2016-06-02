@@ -14,5 +14,6 @@ namespace QuestRacoonWpf
         string GetText(string locale);
         void DeleteLocale(string locale);
         void Delete();
+        void RenameLocale(string oldLocale, string locale);
     }
 }

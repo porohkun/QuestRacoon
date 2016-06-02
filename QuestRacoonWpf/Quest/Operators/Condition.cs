@@ -24,6 +24,8 @@ namespace QuestRacoonWpf.Quest
 
         public override void DeleteLocale(string locale) { }
 
+        public override void RenameLocale(string oldLocale, string locale) { }
+
         public override string GetText(string locale)
         {
             if (_value == "")

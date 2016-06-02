@@ -63,7 +63,7 @@ namespace QuestRacoonWpf.Quest
                 _blocks.Add(block);
             }
         }
-
+        
         public Block CreateBlock(Point location)
         {
             int i = 0;
@@ -120,6 +120,18 @@ namespace QuestRacoonWpf.Quest
             _locales.Remove(locale);
             foreach (var block in _blocks)
                 block.DeleteLocale(locale);
+        }
+
+        public void RenameLocale(string oldLocale, string locale)
+        {
+            if (_locales.Contains(oldLocale))
+            {
+                Edited = true;
+                _locales.Remove(oldLocale);
+                _locales.Add(locale);
+                foreach (var block in _blocks)
+                    block.RenameLocale(oldLocale, locale);
+            }
         }
 
         private void blockEdited()
