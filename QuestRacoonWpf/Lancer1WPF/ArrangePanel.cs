@@ -14,9 +14,14 @@ namespace Lancer1WPF
         private UIElement _draggingObject;
         private Vector _delta;
         private Point _startPosition;
-        private readonly ILayoutStrategy _strategy = new ListLayoutStrategy();
+        protected ILayoutStrategy _strategy;
 
         public event Action<UIElement, int, int> ChildReordered;
+
+        public ArrangePanel ()
+        {
+            _strategy = new TableLayoutStrategy();
+        }
 
         protected override void OnPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
@@ -137,7 +142,7 @@ namespace Lancer1WPF
         }
 
 
-        private Size[] MeasureChildren()
+        protected virtual Size[] MeasureChildren()
         {
             //if (_measures == null || Children.Count != _measures.Length)
             //{

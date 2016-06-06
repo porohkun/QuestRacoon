@@ -12,6 +12,9 @@ namespace QuestRacoonWpf
         public string Locale { get { return _locale; } set { _locale = value; UpdateText(); } }
         public event Action<BaseOperatorControl> WantBeDeleted;
 
+        public virtual bool OpenIndent { get { return false; } }
+        public virtual bool CloseIndent { get { return false; } }
+
         protected virtual void UpdateText()
         {
 

@@ -26,11 +26,11 @@
         <TextBlock Grid.Row="1" Grid.Column="1" Text="Block Name: " HorizontalAlignment="Right" VerticalAlignment="Center"/>
         <TextBox x:Name="headerBox" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Style="{StaticResource TextboxStyle2}" VerticalAlignment="Top"/>
         <ComboBox x:Name="localesBox" Grid.Row="1" Grid.Column="4" SelectionChanged="localesBox_SelectionChanged"/>
-        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+        <Border Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" BorderThickness="1" Background="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
             <ScrollViewer>
-                <lancer:ArrangePanel x:Name="operators" ChildReordered="operators_ChildReordered" VerticalAlignment="Top">
+                <local:ControlsPanel x:Name="operators" ChildReordered="operators_ChildReordered" VerticalAlignment="Top">
                     <Label/>
-                </lancer:ArrangePanel>
+                </local:ControlsPanel>
             </ScrollViewer>
         </Border>
         <StackPanel Grid.Row="3" Grid.Column="4" >

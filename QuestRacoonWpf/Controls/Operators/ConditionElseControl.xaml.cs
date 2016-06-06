@@ -20,6 +20,10 @@ namespace QuestRacoonWpf
     /// </summary>
     public partial class ConditionElseControl : BaseOperatorControl
     {
+        public override bool OpenIndent { get { return true; } }
+
+        public override bool CloseIndent { get { return true; } }
+
         private ConditionElse _conditionElse;
 
         public ConditionElseControl()

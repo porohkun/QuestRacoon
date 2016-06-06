@@ -67,7 +67,7 @@ namespace QuestRacoonWpf
             Start.WantBeDeleted -= block_WantBeDeleted;
             End.Moving -= flowBlock_Moved;
             End.WantBeDeleted -= block_WantBeDeleted;
-            var workspace = this.Parent as DragCanvas;
+            var workspace = this.Parent as Workspace;
             workspace.Children.Remove(this);
         }
 

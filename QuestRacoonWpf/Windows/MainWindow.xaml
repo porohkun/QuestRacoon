@@ -130,10 +130,10 @@
                     </Grid>
                 </ControlTemplate>
             </ScrollViewer.Template>
-            <local:DragCanvas  x:Name="dragCanvas"
+            <local:Workspace  x:Name="dragCanvas"
                                AllowDragging="{Binding IsChecked, ElementName=btnAllowDragging}"
                                AllowDragOutOfView="{Binding IsChecked, ElementName=btnAllowDragOutOfView}" Background="Transparent">
-            </local:DragCanvas>
+            </local:Workspace>
         </ScrollViewer>
     </Grid>
 </Window>

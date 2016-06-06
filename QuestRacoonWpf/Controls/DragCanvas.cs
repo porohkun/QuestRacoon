@@ -103,40 +103,7 @@ namespace QuestRacoonWpf
         }
 
         #endregion // Constructor
-
-        #region BL
-
-        public void AddBlock(FlowBlock block)
-        {
-            Children.Add(block);
-            SetTop(block, block.Top);
-            SetLeft(block, block.Left);
-        }
         
-        public FlowBlock GetBlock(string link)
-        {
-            foreach (var child in Children)
-            {
-                var block = child as FlowBlock;
-                if (block != null && block.Header == link)
-                    return block;
-            }
-            return null;
-        }
-
-        public List<FlowBlock> GetBlocks()
-        {
-            var result = new List<FlowBlock>();
-            foreach (var child in Children)
-            {
-                if (child is FlowBlock)
-                    result.Add(child as FlowBlock);
-            }
-            return result;
-        }
-
-        #endregion
-
         #region Interface
 
         #region AllowDragging

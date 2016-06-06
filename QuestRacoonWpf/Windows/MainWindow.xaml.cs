@@ -72,7 +72,7 @@ namespace QuestRacoonWpf
             {
                 if (!_realMoving)
                 {
-                    if (e.Source is DragCanvas)
+                    if (e.Source is Workspace)
                         scrollViewer.ContextMenu.IsOpen = true;
                     else
                     {

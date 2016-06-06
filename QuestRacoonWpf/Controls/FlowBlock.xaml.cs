@@ -72,7 +72,7 @@ namespace QuestRacoonWpf
 
         private void _block_Deleted()
         {
-            var workspace = Parent as DragCanvas;
+            var workspace = Parent as Workspace;
             WantBeDeleted?.Invoke();
             workspace.Children.Remove(this);
         }
@@ -86,7 +86,7 @@ namespace QuestRacoonWpf
         private void _block_NameChanged()
         {
             headerText.Content = _block.Name;
-            foreach (var block in (Parent as DragCanvas).GetBlocks())
+            foreach (var block in (Parent as Workspace).GetBlocks())
             {
                 block.CheckLinks();
             }
@@ -119,7 +119,7 @@ namespace QuestRacoonWpf
             var links = new List<string>(from op in _block where op is Link select (op as Link).To);
             var forDel = new List<Arrow>();
             _brokenLinks.Clear();
-            var workspace = Parent as DragCanvas;
+            var workspace = Parent as Workspace;
             if (workspace == null) return;
 
             foreach (var link in _links)

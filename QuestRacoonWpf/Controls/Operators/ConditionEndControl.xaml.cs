@@ -20,6 +20,8 @@ namespace QuestRacoonWpf
     /// </summary>
     public partial class ConditionEndControl : BaseOperatorControl
     {
+        public override bool CloseIndent { get { return true; } }
+
         private ConditionEnd _conditionEnd;
 
         public ConditionEndControl()
