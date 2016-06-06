@@ -11,11 +11,13 @@ namespace QuestRacoonWpf.Quest
     {
         private List<Block> _blocks = new List<Block>();
         private List<string> _locales = new List<string>();
+        private List<string> _variables = new List<string>();
 
         public bool Edited { get; private set; }
         public string MainLocale { get; private set; }
         public IEnumerable<Block> Blocks { get { foreach (var block in _blocks) yield return block; } }
         public IEnumerable<string> Locales { get { foreach (var locale in _locales) yield return locale; } }
+        public IEnumerable<string> Variables { get { foreach (var variable in _variables) yield return variable; } }
 
         public event Action<Block> BlockAdded;
         public event Action MainLocaleChanged;
@@ -92,6 +94,17 @@ namespace QuestRacoonWpf.Quest
         {
             _blocks.Remove(block);
             Edited = true;
+        }
+
+        internal void RecalculateVariables()
+        {
+            _variables.Clear();
+            List<string> temp = new List<string>();
+            foreach (var block in Blocks)
+                foreach (var ass in (from c in block where c is Assignment select c as Assignment))
+                    temp.AddRange(ass.GetVariables());
+
+            _variables.AddRange((from v in temp where v != null && v != "" select v).Distinct());
         }
 
         public Block GetBlock(string name)

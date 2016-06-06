@@ -58,5 +58,10 @@ namespace QuestRacoonWpf.Quest
             json.Obj.Add("value", Value);
             return json;
         }
+
+        internal IEnumerable<string> GetVariables()
+        {
+            yield return _variable;
+        }
     }
 }

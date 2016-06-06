@@ -63,7 +63,7 @@ namespace QuestRacoonWpf
             BaseOperatorControl opc = null;
             switch (op.Type)
             {
-                case Quest.OperatorType.Assignment: break;
+                case Quest.OperatorType.Assignment: opc = new AssignmentControl(op as Quest.Assignment, _quest); break;
                 case Quest.OperatorType.Condition: opc = new ConditionControl(op as Quest.Condition); break;
                 case Quest.OperatorType.ConditionElse: opc = new ConditionElseControl(op as Quest.ConditionElse); break;
                 case Quest.OperatorType.ConditionEnd: opc = new ConditionEndControl(op as Quest.ConditionEnd); break;

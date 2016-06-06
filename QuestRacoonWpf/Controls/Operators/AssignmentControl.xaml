@@ -1,0 +1,36 @@
+﻿<local:BaseOperatorControl x:Class="QuestRacoonWpf.AssignmentControl"
+                           xmlns:Controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuestRacoonWpf"
+             mc:Ignorable="d" 
+             d:DesignHeight="45" d:DesignWidth="519" Background="#FFF3FF79">
+    <Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="10"/>
+            </Grid.ColumnDefinitions>
+            <Controls:AutoCompleteBox x:Name="variableBox" Grid.Column="1" Grid.Row="1" FontFamily="Calibri" FontSize="16.667" VerticalContentAlignment="Stretch" LostFocus="assignment_LostFocus"/>
+            <TextBlock Grid.Column="3" Grid.Row="1" FontSize="16.667" FontWeight="Bold" HorizontalAlignment="Center">=</TextBlock>
+            <TextBox x:Name="valueBox" Grid.Column="5" Grid.Row="1" FontFamily="Calibri" FontSize="18.667" LostFocus="assignment_LostFocus"/>
+            <Button Grid.Column="7" Grid.Row="1" VerticalAlignment="Stretch" Click="CloseButton_Click">
+                <Image Source="..\..\Icons\cross.png" Width="16" Height="16"/>
+            </Button>
+        </Grid>
+    </Border>
+</local:BaseOperatorControl>

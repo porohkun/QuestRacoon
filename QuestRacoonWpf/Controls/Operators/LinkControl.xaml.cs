@@ -24,8 +24,22 @@ namespace QuestRacoonWpf
         private Link _link;
         private Quest.Quest _quest;
 
+        #region INotifyPropertyChanged
+
         private IEnumerable<string> _blocks;
         private string _selectedBlock;
+
+        public string SelectedBlock
+        {
+            get { return _selectedBlock; }
+            set { SetField(ref _selectedBlock, value, "SelectedBlock"); }
+        }
+        
+        public IEnumerable<string> Blocks
+        {
+            get { return _blocks; }
+            set { SetField(ref _blocks, value, "Blocks"); }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -41,17 +55,7 @@ namespace QuestRacoonWpf
             return true;
         }
 
-        public string SelectedBlock
-        {
-            get { return _selectedBlock; }
-            set { SetField(ref _selectedBlock, value, "SelectedBlock"); }
-        }
-        
-        public IEnumerable<string> Blocks
-        {
-            get { return _blocks; }
-            set { SetField(ref _blocks, value, "Blocks"); }
-        }
+        #endregion
 
         public LinkControl()
         {

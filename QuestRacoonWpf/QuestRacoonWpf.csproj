@@ -73,6 +73,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Operators\AssignmentControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\Operators\ConditionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,6 +122,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Controls\ControlsPanel.cs" />
+    <Compile Include="Controls\Operators\AssignmentControl.xaml.cs">
+      <DependentUpon>AssignmentControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Operators\ConditionControl.xaml.cs">
       <DependentUpon>ConditionControl.xaml</DependentUpon>
     </Compile>
