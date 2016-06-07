@@ -8,7 +8,7 @@ namespace QuestRacoonWpf.Quest
 {
     public class Condition : BaseOperator
     {
-        public string _value = "";
+        private string _value = "";
 
         public string Value
         {

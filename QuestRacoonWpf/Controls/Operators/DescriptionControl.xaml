@@ -6,8 +6,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuestRacoonWpf"
              mc:Ignorable="d"
-             d:DesignHeight="108.84" d:DesignWidth="300" Background="#FFA9E2C5">
-    <Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+             d:DesignHeight="205.84" d:DesignWidth="468" Background="#FFA9E2C5">
+    <Border BorderThickness="1,1,2,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="10"/>
@@ -23,24 +23,24 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="10"/>
             </Grid.RowDefinitions>
-                <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Orientation="Horizontal">
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {b} " ToolTip="Bold"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {i} " ToolTip="Italic"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {color} " ToolTip="Color"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {s} " ToolTip="Writing speed (Chars per sec)"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {w} " ToolTip="Wait (seconds)"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wi} " ToolTip="Wait for input"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wc} " ToolTip="Wait for input and clear"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {c} " ToolTip="Clear"/>
-                    <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {x} " ToolTip="Exit without waiting for input"/>
-                </StackPanel>
-                <avalonedit:TextEditor x:Name="textBox" MaxHeight="25" Grid.Column="1" Grid.Row="3" WordWrap="True"
+            <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Orientation="Horizontal">
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {b} " ToolTip="Bold"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {i} " ToolTip="Italic"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {color} " ToolTip="Color"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {s} " ToolTip="Writing speed (Chars per sec)"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {w} " ToolTip="Wait (seconds)"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wi} " ToolTip="Wait for input"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {wc} " ToolTip="Wait for input and clear"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {c} " ToolTip="Clear"/>
+                <Button Margin="0,0,2,0" Style="{StaticResource LargeButton}" Click="Button_Click" Content=" {x} " ToolTip="Exit without waiting for input"/>
+            </StackPanel>
+            <avalonedit:TextEditor x:Name="textBox" MaxHeight="25" Grid.Column="1" Grid.Row="3" WordWrap="True"
                          VerticalScrollBarVisibility="Auto" GotFocus="textBox_GotFocus" LostFocus="textBox_LostFocus" FontFamily="Calibri" FontSize="18.667">
-                    <avalonedit:TextEditor.Options >
-                        <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="16"/>
-                    </avalonedit:TextEditor.Options>
-                </avalonedit:TextEditor>
-            <Button Grid.Column="3" Grid.Row="1" VerticalAlignment="Stretch" Click="CloseButton_Click">
+                <avalonedit:TextEditor.Options >
+                    <avalonedit:TextEditorOptions EnableTextDragDrop="True" WordWrapIndentation="16"/>
+                </avalonedit:TextEditor.Options>
+            </avalonedit:TextEditor>
+            <Button Grid.Column="3" Grid.Row="3"  Height="25" VerticalAlignment="Top" Click="CloseButton_Click">
                 <Image Source="..\..\Icons\cross.png" Width="16" Height="16"/>
             </Button>
         </Grid>

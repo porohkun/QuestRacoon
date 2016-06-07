@@ -189,7 +189,8 @@ namespace QuestRacoonWpf
 
         private void menuItem_PlayClick(object sender, RoutedEventArgs e)
         {
-
+            var playWindow = new PlayWindow(_quest);
+            playWindow.ShowDialog();
         }
 
         private void menuItem_LocalesClick(object sender, RoutedEventArgs e)

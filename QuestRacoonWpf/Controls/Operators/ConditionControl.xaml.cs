@@ -34,6 +34,11 @@ namespace QuestRacoonWpf
             _condition = condition;
         }
 
+        protected override void UpdateText()
+        {
+            conditionBox.Text = _condition.Value;
+        }
+
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             _condition.Delete();
@@ -42,6 +47,7 @@ namespace QuestRacoonWpf
 
         private void conditionBox_LostFocus(object sender, RoutedEventArgs e)
         {
+            _condition.Value = conditionBox.Text;
         }
     }
 }

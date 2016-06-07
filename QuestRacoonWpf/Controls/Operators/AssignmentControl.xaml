@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:QuestRacoonWpf"
              mc:Ignorable="d" 
              d:DesignHeight="45" d:DesignWidth="519" Background="#FFF3FF79">
-    <Border BorderThickness="0,0,1,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
+    <Border BorderThickness="1,1,2,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="10"/>

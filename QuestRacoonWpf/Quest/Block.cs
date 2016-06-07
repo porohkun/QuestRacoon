@@ -53,12 +53,12 @@ namespace QuestRacoonWpf.Quest
         {
             if (json.Obj.ContainsKey("text"))
             {
-                _operators.Add(Description.ParseOld(json["text"]));
+                Add(Description.ParseOld(json["text"]));
             }
             else
             {
                 foreach (var op in json["operators"])
-                    _operators.Add(BaseOperator.Parse(op));
+                    Add(BaseOperator.Parse(op));
             }
         }
 

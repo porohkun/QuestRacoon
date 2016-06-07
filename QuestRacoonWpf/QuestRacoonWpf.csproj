@@ -89,6 +89,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PlayWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\AddLocaleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -134,6 +138,20 @@
     <Compile Include="Controls\Operators\ConditionEndControl.xaml.cs">
       <DependentUpon>ConditionEndControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayWindow.xaml.cs">
+      <DependentUpon>PlayWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Play\AST.cs" />
+    <Compile Include="Play\AST_Assign.cs" />
+    <Compile Include="Play\AST_Branch.cs" />
+    <Compile Include="Play\AST_Description.cs" />
+    <Compile Include="Play\AST_Link.cs" />
+    <Compile Include="Play\AST_List.cs" />
+    <Compile Include="Play\AST_Condition.cs" />
+    <Compile Include="Play\AST_Speech.cs" />
+    <Compile Include="Play\IQuestContext.cs" />
+    <Compile Include="Play\QuestContext.cs" />
+    <Compile Include="Play\QuestException.cs" />
     <Compile Include="Windows\AddLocaleWindow.xaml.cs">
       <DependentUpon>AddLocaleWindow.xaml</DependentUpon>
     </Compile>
