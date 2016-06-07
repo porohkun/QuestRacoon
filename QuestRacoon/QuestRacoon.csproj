@@ -89,7 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PlayWindow.xaml">
+    <Page Include="Windows\PlayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +138,7 @@
     <Compile Include="Controls\Operators\ConditionEndControl.xaml.cs">
       <DependentUpon>ConditionEndControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlayWindow.xaml.cs">
+    <Compile Include="Windows\PlayWindow.xaml.cs">
       <DependentUpon>PlayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Play\AST.cs" />
