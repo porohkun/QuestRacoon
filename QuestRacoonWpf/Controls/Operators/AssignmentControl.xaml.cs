@@ -11,10 +11,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using QuestRacoonWpf.Quest;
+using QuestRacoon.Quest;
 using System.ComponentModel;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     /// <summary>
     /// Interaction logic for Condition.xaml

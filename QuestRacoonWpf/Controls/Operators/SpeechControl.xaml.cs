@@ -16,9 +16,9 @@ using ICSharpCode.AvalonEdit.Folding;
 using ICSharpCode.AvalonEdit.Highlighting;
 using System.Xml;
 using System.IO;
-using QuestRacoonWpf.Quest;
+using QuestRacoon.Quest;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     /// <summary>
     /// Interaction logic for SpeechControl.xaml
@@ -32,7 +32,7 @@ namespace QuestRacoonWpf
             if (HighlightingManager.Instance.HighlightingDefinitions.Count(d => d.Name == "Custom Highlighting") == 0)
             {
                 IHighlightingDefinition customHighlighting;
-                using (Stream s = typeof(BlockEditWindow).Assembly.GetManifestResourceStream("QuestRacoonWpf.CustomHighlighting.xshd"))
+                using (Stream s = typeof(BlockEditWindow).Assembly.GetManifestResourceStream("QuestRacoon.CustomHighlighting.xshd"))
                 {
                     if (s == null)
                         throw new InvalidOperationException("Could not find embedded resource");

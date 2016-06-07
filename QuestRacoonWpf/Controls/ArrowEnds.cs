@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     [Flags]
     public enum ArrowEnds

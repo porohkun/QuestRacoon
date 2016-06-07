@@ -9,7 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     /// <summary>
     /// A Canvas which manages dragging of the UIElements it contains.  

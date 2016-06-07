@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     public static class QR
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Controls;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     public class BaseOperatorControl: UserControl
     {

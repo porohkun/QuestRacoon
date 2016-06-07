@@ -9,9 +9,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using QuestRacoonWpf.Quest;
+using QuestRacoon.Quest;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     /// <summary>
     /// Interaction logic for PlayWindow.xaml

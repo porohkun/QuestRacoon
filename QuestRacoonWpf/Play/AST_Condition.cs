@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using QuestRacoonWpf.Quest;
+using QuestRacoon.Quest;
 
-namespace QuestRacoonWpf.Play
+namespace QuestRacoon.Play
 {
     public class AST_Condition:AST
     {

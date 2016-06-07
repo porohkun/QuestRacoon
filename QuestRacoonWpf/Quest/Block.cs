@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 using PNetJson;
 using System.Collections;
 
-namespace QuestRacoonWpf.Quest
+namespace QuestRacoon.Quest
 {
     public class Block:IEnumerable<IOperator>, IList<IOperator>
     {

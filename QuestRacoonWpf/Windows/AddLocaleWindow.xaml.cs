@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     /// <summary>
     /// Interaction logic for AddLocaleWindow.xaml

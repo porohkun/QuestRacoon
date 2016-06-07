@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using System.Security;
 using System.Text;
 
-namespace QuestRacoonWpf.Play
+namespace QuestRacoon.Play
 {
     public class QuestException : SystemException
     {

@@ -12,7 +12,7 @@ using PNetJson;
 using System.IO;
 using System.Windows;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     public class Settings
     {

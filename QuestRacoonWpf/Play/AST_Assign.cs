@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using QuestRacoonWpf.Quest;
+using QuestRacoon.Quest;
 
-namespace QuestRacoonWpf.Play
+namespace QuestRacoon.Play
 {
     public class AST_Assign : AST
     {

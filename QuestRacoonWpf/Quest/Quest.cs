@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PNetJson;
 
-namespace QuestRacoonWpf.Quest
+namespace QuestRacoon.Quest
 {
     public class Quest
     {

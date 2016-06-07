@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using PNetJson;
 
-namespace QuestRacoonWpf.Quest
+namespace QuestRacoon.Quest
 {
     public abstract class BaseOperator : IOperator
     {

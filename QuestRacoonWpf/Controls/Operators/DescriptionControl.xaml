@@ -1,10 +1,10 @@
 ﻿<local:BaseOperatorControl xmlns:avalonedit="clr-namespace:ICSharpCode.AvalonEdit;assembly=ICSharpCode.AvalonEdit"
-             x:Class="QuestRacoonWpf.DescriptionControl"
+             x:Class="QuestRacoon.DescriptionControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:QuestRacoonWpf"
+             xmlns:local="clr-namespace:QuestRacoon"
              mc:Ignorable="d"
              d:DesignHeight="205.84" d:DesignWidth="468" Background="#FFA9E2C5">
     <Border BorderThickness="1,1,2,1" BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}">

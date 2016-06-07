@@ -10,7 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
 
-namespace QuestRacoonWpf
+namespace QuestRacoon
 {
     public class Arrow : Shape
     {
