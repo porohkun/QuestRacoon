@@ -23,7 +23,7 @@ namespace QuestRacoon
 
         //public string Locale { get { return Thread.CurrentThread.CurrentUICulture.ToString(); } }
 
-        private Rect _blockEditWindowStartupLocation = Rect.Empty;
+        private Rect _blockEditWindowStartupLocation = new Rect(200, 200, 400, 400);
         private List<string> _recentFiles = new List<string>();
 
         private string _path = Path.Combine(QR.AppDataPath, "settings.json");
@@ -71,6 +71,8 @@ namespace QuestRacoon
                 var bewsl = settings["block_edit_window_startup_location"];
                 _blockEditWindowStartupLocation = new Rect(bewsl["left"], bewsl["top"], bewsl["width"], bewsl["height"]);
             }
+            else
+                _blockEditWindowStartupLocation = new Rect(200, 200, 400, 400);
         }
 
         public JSONValue ExportSettings()
