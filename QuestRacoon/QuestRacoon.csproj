@@ -138,6 +138,8 @@
     <Compile Include="Controls\Operators\ConditionEndControl.xaml.cs">
       <DependentUpon>ConditionEndControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DrWPF.Windows.Data\ObservableDictionary.cs" />
+    <Compile Include="DrWPF.Windows.Data\ObservableSortedDictionary.cs" />
     <Compile Include="Windows\PlayWindow.xaml.cs">
       <DependentUpon>PlayWindow.xaml</DependentUpon>
     </Compile>

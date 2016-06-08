@@ -1,17 +1,29 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QuestRacoon.Quest;
+using DrWPF.Windows.Data;
 
 namespace QuestRacoon.Play
 {
     public class QuestContext : IQuestContext
     {
+        private class DictComparer : IComparer<DictionaryEntry>
+        {
+            public int Compare(DictionaryEntry x, DictionaryEntry y)
+            {
+                return String.Compare(x.Key as string, y.Key as string);
+            }
+        }
+
         private Quest.Quest _quest;
-        private Dictionary<string, string> _variables = new Dictionary<string, string>();
+        private ObservableSortedDictionary<string, string> _variables = new ObservableSortedDictionary<string, string>(new DictComparer());
         private Action _clearCallback;
         private Dictionary<OperatorType, Action<IOperator>> _callbacks = new Dictionary<OperatorType, Action<IOperator>>();
+
+        public IDictionary<string,string> Variables { get { return _variables; } }
 
         public QuestContext(Quest.Quest quest)
         {

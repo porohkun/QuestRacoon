@@ -16,18 +16,20 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="5"/>
             <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="10"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource TextblockStyle2}">Current Block:</TextBlock>
-        <TextBlock Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextblockStyle2}">None</TextBlock>
-        <StackPanel x:Name="actionsPanel" Grid.Column="1" Grid.Row="3"/>
-        <DataGrid x:Name="variablesPanel" Grid.Column="3" Grid.Row="3">
+        <ComboBox x:Name="localesBox" Grid.Column="1" Grid.Row="1" FontFamily="Calibri" FontSize="18.866"/>
+        <TextBlock Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource TextblockStyle2}">Current Block:</TextBlock>
+        <TextBlock x:Name="blockNameBox" Grid.Column="4" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource TextblockStyle2}">None</TextBlock>
+        <StackPanel x:Name="actionsPanel" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"/>
+        <DataGrid x:Name="variablesPanel" Grid.Column="4" Grid.Row="3" AutoGenerateColumns="False" IsReadOnly="True" RowHeaderWidth="0">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Variable"/>
-                <DataGridTextColumn Width="50" Header="Value"/>
+                <DataGridTextColumn Width="*" Header="Variable" Binding="{Binding Key}"/>
+                <DataGridTextColumn Width="50" Header="Value" Binding="{Binding Value}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -19,18 +19,26 @@ namespace QuestRacoon
     public partial class PlayWindow : Window
     {
         private Play.IQuestContext _context;
+        public IDictionary<string, string> Variables { get; set; }
+        public string SelectedLocale { get { return localesBox.SelectedValue.ToString(); } }
 
         public PlayWindow()
         {
             InitializeComponent();
         }
 
-        public PlayWindow(Quest.Quest quest) : this()
+        public PlayWindow(Quest.Quest quest):this()
         {
             _context = new Play.QuestContext(quest);
             _context.RegisterCallback(OperatorType.Description, DescriptionCallback);
             _context.RegisterCallback(OperatorType.Speech, SpeechCallback);
             _context.RegisterCallback(OperatorType.Link, LinkCallback);
+            
+            variablesPanel.ItemsSource = (_context as Play.QuestContext).Variables;
+            localesBox.ItemsSource = quest.Locales;
+            localesBox.SelectedIndex = 0;
+            
+            
             GoToBlock("Start");
         }
 
@@ -42,6 +50,8 @@ namespace QuestRacoon
                 MessageBox.Show(string.Format("нет блока с именем \"{0}\"", blockName));
                 return;
             }
+
+            blockNameBox.Text = blockName;
 
             actionsPanel.Children.Clear();
 
@@ -55,7 +65,7 @@ namespace QuestRacoon
             var description = oper as Description;
             actionsPanel.Children.Add(new TextBlock()
             {
-                Text = description.Text.GetText("Default"),
+                Text = description.Text.GetText(SelectedLocale),
                 TextWrapping = TextWrapping.Wrap,
                 FontFamily = new FontFamily("Calibri"),
                 FontSize = 18.667
@@ -67,7 +77,7 @@ namespace QuestRacoon
             var speech = oper as Speech;
             actionsPanel.Children.Add(new TextBlock()
             {
-                Text = string.Format("{0}: {1}", speech.Character, speech.Text.GetText("Default")),
+                Text = string.Format("{0}: {1}", speech.Character, speech.Text.GetText(SelectedLocale)),
                 TextWrapping = TextWrapping.Wrap,
                 FontFamily = new FontFamily("Calibri"),
                 FontSize = 18.667

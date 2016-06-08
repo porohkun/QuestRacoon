@@ -88,72 +88,49 @@ namespace QuestRacoon.Play
 
                     switch (item.Operator)
                     {
-                        case OperatorType.NOT:
-                            if (op2.Type == TokenType.Boolean) stack.Push(new Token(!op2.GetBoolean(context)));
-                            else throw new QuestException("Неверно составлена формула.");
-                            continue;
-                        case OperatorType.UnaryMinus:
-                            if (op2.Type == TokenType.Numeric) stack.Push(new Token(-op2.GetNumber(context)));
-                            else throw new QuestException("Неверно составлена формула.");
-                            continue;
+                        case OperatorType.NOT: stack.Push(new Token(!op2.GetBoolean(context))); continue;
+                        case OperatorType.UnaryMinus: stack.Push(new Token(-op2.GetNumber(context))); continue;
                     }
                     var op1 = stack.Pop();
 
-                    if (item.Operator== OperatorType.Ternar)
+                    if (item.Operator == OperatorType.Ternar)
                     {
                         var op0 = stack.Pop();
-                        if (op0.Type != TokenType.Boolean)
-                            throw new QuestException("Неверно составлена формула.");
-                        if (op1.Type == TokenType.Boolean && op2.Type == TokenType.Boolean)
-                            stack.Push(new Token(op0.GetBoolean(context) ? op1.GetBoolean(context) : op2.GetBoolean(context)));
-                        else if (op1.Type == TokenType.Numeric && op2.Type == TokenType.Numeric)
-                            stack.Push(new Token(op0.GetBoolean(context) ? op1.GetNumber(context) : op2.GetNumber(context)));
-                        else throw new QuestException("Неверно составлена формула.");
+                        stack.Push(new Token(op0.GetBoolean(context) ? op1.GetValue(context) : op2.GetValue(context)));
                         continue;
                     }
 
-                    //if (op1.Type == TokenType.Boolean && op2.Type == TokenType.Boolean)
-                        switch (item.Operator)
-                        {
-                            case OperatorType.OR:
-                                stack.Push(new Token(op1.GetBoolean(context) || op2.GetBoolean(context))); continue;
-                            case OperatorType.AND:
-                                stack.Push(new Token(op1.GetBoolean(context) && op2.GetBoolean(context))); continue;
-                            //case OperatorType.Equal:
-                            //    stack.Push(new Token(op1.GetBoolean(context) == op2.GetBoolean(context))); continue;
-                            //case OperatorType.NotEqual:
-                            //    stack.Push(new Token(op1.GetBoolean(context) != op2.GetBoolean(context))); continue;
-                            //default:
-                            //    throw new QuestException("Неверно составлена формула.");
-                    //    }
-                    //else if (op1.Type == TokenType.Numeric && op2.Type == TokenType.Numeric)
-                    //    switch (item.Operator)
-                    //    {
-                            case OperatorType.Less:
-                                stack.Push(new Token(op1.GetNumber(context) < op2.GetNumber(context))); continue;
-                            case OperatorType.More:
-                                stack.Push(new Token(op1.GetNumber(context) > op2.GetNumber(context))); continue;
-                            case OperatorType.LessOrEqual:
-                                stack.Push(new Token(op1.GetNumber(context) <= op2.GetNumber(context))); continue;
-                            case OperatorType.MoreOrEqual:
-                                stack.Push(new Token(op1.GetNumber(context) >= op2.GetNumber(context))); continue;
-                            case OperatorType.Plus:
-                                stack.Push(new Token(op1.GetNumber(context) + op2.GetNumber(context))); continue;
-                            case OperatorType.Minus:
-                                stack.Push(new Token(op1.GetNumber(context) - op2.GetNumber(context))); continue;
-                            case OperatorType.Multiply:
-                                stack.Push(new Token(op1.GetNumber(context) * op2.GetNumber(context))); continue;
-                            case OperatorType.Divide:
-                                stack.Push(new Token(op1.GetNumber(context) / op2.GetNumber(context))); continue;
-                            case OperatorType.Power:
-                                stack.Push(new Token((int)Math.Pow(op1.GetNumber(context), op2.GetNumber(context)))); continue;
-                            case OperatorType.Equal:
-                                stack.Push(new Token(op1.GetNumber(context) == op2.GetNumber(context))); continue;
-                            case OperatorType.NotEqual:
-                                stack.Push(new Token(op1.GetNumber(context) != op2.GetNumber(context))); continue;
-                            default:
-                                throw new QuestException("Неверно составлена формула.");
-                        }
+                    switch (item.Operator)
+                    {
+                        case OperatorType.OR:
+                            stack.Push(new Token(op1.GetBoolean(context) || op2.GetBoolean(context))); continue;
+                        case OperatorType.AND:
+                            stack.Push(new Token(op1.GetBoolean(context) && op2.GetBoolean(context))); continue;
+                        case OperatorType.Less:
+                            stack.Push(new Token(op1.GetNumber(context) < op2.GetNumber(context))); continue;
+                        case OperatorType.More:
+                            stack.Push(new Token(op1.GetNumber(context) > op2.GetNumber(context))); continue;
+                        case OperatorType.LessOrEqual:
+                            stack.Push(new Token(op1.GetNumber(context) <= op2.GetNumber(context))); continue;
+                        case OperatorType.MoreOrEqual:
+                            stack.Push(new Token(op1.GetNumber(context) >= op2.GetNumber(context))); continue;
+                        case OperatorType.Plus:
+                            stack.Push(new Token(op1.GetNumber(context) + op2.GetNumber(context))); continue;
+                        case OperatorType.Minus:
+                            stack.Push(new Token(op1.GetNumber(context) - op2.GetNumber(context))); continue;
+                        case OperatorType.Multiply:
+                            stack.Push(new Token(op1.GetNumber(context) * op2.GetNumber(context))); continue;
+                        case OperatorType.Divide:
+                            stack.Push(new Token(op1.GetNumber(context) / op2.GetNumber(context))); continue;
+                        case OperatorType.Power:
+                            stack.Push(new Token((int)Math.Pow(op1.GetNumber(context), op2.GetNumber(context)))); continue;
+                        case OperatorType.Equal:
+                            stack.Push(new Token(op1.GetNumber(context) == op2.GetNumber(context))); continue;
+                        case OperatorType.NotEqual:
+                            stack.Push(new Token(op1.GetNumber(context) != op2.GetNumber(context))); continue;
+                        default:
+                            throw new QuestException("Неверно составлена формула.");
+                    }
                     throw new QuestException("Неверно составлена формула.");
                 }
                 else

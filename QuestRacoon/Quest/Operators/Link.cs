@@ -9,8 +9,8 @@ namespace QuestRacoon.Quest
 {
     public class Link: BaseOperator
     {
-        private string _text;
-        private string _to;
+        private string _text = "";
+        private string _to = "";
         public string Text { get { return _text; } set { if (_text != value) { _text = value; Edited?.Invoke(); } } }
         public string To { get { return _to; } set { if (_to != value) { _to = value; Edited?.Invoke(); } } }
 
